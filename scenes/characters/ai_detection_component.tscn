@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsuyrx13ts6po"]
+
+[ext_resource type="Script" path="res://scripts/character/enemy/ai_detection_component.gd" id="1_8ukbn"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w125p"]
+radius = 50.0
+
+[node name="AIDetectionComponent" type="Node3D"]
+script = ExtResource("1_8ukbn")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+target_position = Vector3(0, 0, -50)
+collision_mask = 5
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_w125p")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

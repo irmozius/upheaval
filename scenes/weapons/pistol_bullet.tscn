@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqu486lrpdevd"]
+
+[ext_resource type="Script" path="res://scripts/weapons/base_bullet.gd" id="1_vwkk2"]
+[ext_resource type="PackedScene" uid="uid://dngqevxjlar1l" path="res://scenes/weapons/hurt_box.tscn" id="2_yk05k"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_c6336"]
+radius = 0.153
+height = 0.62
+radial_segments = 4
+rings = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l6m1t"]
+radius = 0.245
+height = 0.895
+
+[node name="pistol_bullet" type="Node3D"]
+script = ExtResource("1_vwkk2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_c6336")
+
+[node name="HurtBox" parent="." instance=ExtResource("2_yk05k")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_l6m1t")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="enemy_hit" from="HurtBox" to="." method="_on_hurt_box_enemy_hit"]
+[connection signal="wall_hit" from="HurtBox" to="." method="_on_hurt_box_wall_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

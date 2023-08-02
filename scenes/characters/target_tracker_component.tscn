@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djqi5uhkfo4k7"]
+
+[ext_resource type="Script" path="res://scripts/character/enemy/target_tracker_component.gd" id="1_4jiw7"]
+
+[node name="TargetTrackerComponent" type="Node3D"]
+script = ExtResource("1_4jiw7")

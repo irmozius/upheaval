@@ -1,0 +1,135 @@
+[gd_scene load_steps=21 format=3 uid="uid://droiglhip8yg4"]
+
+[ext_resource type="Script" path="res://scripts/character/player/player_character.gd" id="1_gryln"]
+[ext_resource type="Script" path="res://scripts/character/player/PlayerInput.gd" id="2_n353x"]
+[ext_resource type="Script" path="res://scripts/character/player/MotionComponent.gd" id="3_b4bgd"]
+[ext_resource type="Script" path="res://scripts/character/player/GravityComponent.gd" id="3_m4a0o"]
+[ext_resource type="Script" path="res://scripts/character/player/RotatorComponent.gd" id="5_bgpgs"]
+[ext_resource type="Script" path="res://scripts/character/player/states.gd" id="5_yocrt"]
+[ext_resource type="Script" path="res://scripts/character/player/states/idle.gd" id="6_dwen0"]
+[ext_resource type="Script" path="res://scripts/character/player/states/motion.gd" id="7_bloci"]
+[ext_resource type="Script" path="res://scripts/character/JumpComponent.gd" id="7_kmhjy"]
+[ext_resource type="PackedScene" uid="uid://5ps3vjr4qnob" path="res://scenes/characters/health_component.tscn" id="8_hy55j"]
+[ext_resource type="Script" path="res://scripts/character/player/states/jumping.gd" id="9_qrxjv"]
+[ext_resource type="Script" path="res://scripts/character/player/states/falling.gd" id="11_10w42"]
+[ext_resource type="PackedScene" uid="uid://bxoaikhox2c48" path="res://scenes/characters/weapon_component.tscn" id="12_d5cwm"]
+[ext_resource type="PackedScene" uid="uid://ctv7vmtkqc4xw" path="res://scenes/characters/hit_box_component.tscn" id="13_pj7eo"]
+[ext_resource type="Script" path="res://scripts/character/player/DetectableComponent.gd" id="15_ckcpl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7noai"]
+radius = 0.645
+height = 3.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d0yip"]
+radius = 0.63
+height = 3.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_1xsct"]
+size = Vector3(0.715, 1.125, 0.62)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jvgpw"]
+radius = 1.1
+height = 3.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7m6k6"]
+
+[node name="PlayerCharacter" type="CharacterBody3D"]
+script = ExtResource("1_gryln")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_7noai")
+
+[node name="meshes" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("CapsuleMesh_d0yip")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(-4.37114e-08, 0, 1, -0.965926, 0.258819, -4.2222e-08, -0.258819, -0.965926, -1.13133e-08, 0, 0.640016, -0.576599)
+mesh = SubResource("PrismMesh_1xsct")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25664, -0.205669)
+
+[node name="WeaponComponent" parent="Camera3D" instance=ExtResource("12_d5cwm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.610955, -0.590029, -0.372336)
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -300)
+
+[node name="PlayerInput" type="Node" parent="."]
+script = ExtResource("2_n353x")
+
+[node name="GravityComponent" type="Node3D" parent="."]
+script = ExtResource("3_m4a0o")
+gravity_amount = 2.0
+
+[node name="MotionComponent" type="Node3D" parent="."]
+script = ExtResource("3_b4bgd")
+speed = 18.0
+
+[node name="RotatorComponent" type="Node3D" parent="."]
+script = ExtResource("5_bgpgs")
+
+[node name="JumpComponent" type="Node3D" parent="."]
+script = ExtResource("7_kmhjy")
+jump_velocity = 30.0
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("8_hy55j")]
+hitbox = NodePath("../HitBoxComponent")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("13_pj7eo")]
+team = "player"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_jvgpw")
+
+[node name="states" type="Node" parent="."]
+script = ExtResource("5_yocrt")
+
+[node name="idle" type="Node" parent="states"]
+script = ExtResource("6_dwen0")
+
+[node name="motion" type="Node" parent="states"]
+script = ExtResource("7_bloci")
+
+[node name="jumping" type="Node" parent="states"]
+script = ExtResource("9_qrxjv")
+
+[node name="falling" type="Node" parent="states"]
+script = ExtResource("11_10w42")
+
+[node name="death" type="Node" parent="states"]
+
+[node name="DetectableComponent" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34618, 0)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("15_ckcpl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectableComponent"]
+shape = SubResource("SphereShape3D_7m6k6")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.235294)

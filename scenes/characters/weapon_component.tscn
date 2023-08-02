@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxoaikhox2c48"]
+
+[ext_resource type="Script" path="res://scripts/character/player/weapon_component.gd" id="1_06dp1"]
+[ext_resource type="PackedScene" uid="uid://c564lqu1xbcvk" path="res://scenes/weapons/pistol.tscn" id="2_w467s"]
+
+[node name="WeaponComponent" type="Node3D"]
+script = ExtResource("1_06dp1")
+
+[node name="pistol" parent="." instance=ExtResource("2_w467s")]

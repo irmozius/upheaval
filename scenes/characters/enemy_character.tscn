@@ -1,0 +1,101 @@
+[gd_scene load_steps=20 format=3 uid="uid://cbesjntvt3q2s"]
+
+[ext_resource type="Script" path="res://scripts/character/enemy/enemy_character.gd" id="1_8bb6u"]
+[ext_resource type="Script" path="res://scripts/character/player/GravityComponent.gd" id="2_0pb8d"]
+[ext_resource type="Script" path="res://scripts/character/JumpComponent.gd" id="3_oiwwn"]
+[ext_resource type="Script" path="res://scripts/character/player/MotionComponent.gd" id="3_sgma0"]
+[ext_resource type="Script" path="res://scripts/character/player/RotatorComponent.gd" id="4_28ebe"]
+[ext_resource type="PackedScene" uid="uid://5ps3vjr4qnob" path="res://scenes/characters/health_component.tscn" id="5_r605a"]
+[ext_resource type="PackedScene" uid="uid://ctv7vmtkqc4xw" path="res://scenes/characters/hit_box_component.tscn" id="6_usg3q"]
+[ext_resource type="PackedScene" uid="uid://djqi5uhkfo4k7" path="res://scenes/characters/target_tracker_component.tscn" id="7_g70ig"]
+[ext_resource type="Script" path="res://scripts/character/player/states.gd" id="8_wkhoj"]
+[ext_resource type="Script" path="res://scripts/character/enemy/states/idle.gd" id="9_dlvsi"]
+[ext_resource type="Script" path="res://scripts/character/enemy/states/chase.gd" id="10_2ky2k"]
+[ext_resource type="Script" path="res://scripts/character/enemy/states/falling.gd" id="10_em7g5"]
+[ext_resource type="PackedScene" uid="uid://dsuyrx13ts6po" path="res://scenes/characters/ai_detection_component.tscn" id="11_5syf3"]
+[ext_resource type="PackedScene" uid="uid://bxoaikhox2c48" path="res://scenes/characters/weapon_component.tscn" id="14_kehyi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j31vc"]
+radius = 0.645
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_admuk"]
+albedo_color = Color(0.909804, 0.321569, 0.403922, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ol1ss"]
+material = SubResource("StandardMaterial3D_admuk")
+radius = 0.63
+height = 3.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_ysoxh"]
+size = Vector3(0.715, 1.125, 0.62)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_di0yb"]
+radius = 1.1
+height = 3.0
+
+[node name="EnemyCharacter" type="CharacterBody3D"]
+script = ExtResource("1_8bb6u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_j31vc")
+
+[node name="meshes" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("CapsuleMesh_ol1ss")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="meshes"]
+transform = Transform3D(-4.37114e-08, 0, 1, -0.965926, 0.258819, -4.2222e-08, -0.258819, -0.965926, -1.13133e-08, 0, 0.640016, -0.576599)
+mesh = SubResource("PrismMesh_ysoxh")
+
+[node name="weapon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.656912, 1.59648, -0.466455)
+
+[node name="WeaponComponent" parent="weapon" instance=ExtResource("14_kehyi")]
+
+[node name="RayCast3D" type="RayCast3D" parent="weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.656912, 0.403523, 0.466455)
+target_position = Vector3(0, 0, -350)
+
+[node name="GravityComponent" type="Node3D" parent="."]
+script = ExtResource("2_0pb8d")
+gravity_amount = 2.0
+
+[node name="JumpComponent" type="Node3D" parent="."]
+script = ExtResource("3_oiwwn")
+jump_velocity = 30.0
+
+[node name="MotionComponent" type="Node3D" parent="."]
+script = ExtResource("3_sgma0")
+speed = 12.0
+
+[node name="RotatorComponent" type="Node3D" parent="."]
+script = ExtResource("4_28ebe")
+
+[node name="AIDetectionComponent" parent="." instance=ExtResource("11_5syf3")]
+
+[node name="TargetTrackerComponent" parent="." instance=ExtResource("7_g70ig")]
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("5_r605a")]
+hitbox = NodePath("../HitBoxComponent")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("6_usg3q")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_di0yb")
+
+[node name="states" type="Node" parent="."]
+script = ExtResource("8_wkhoj")
+
+[node name="idle" type="Node" parent="states"]
+script = ExtResource("9_dlvsi")
+
+[node name="chasing" type="Node" parent="states"]
+script = ExtResource("10_2ky2k")
+
+[node name="falling" type="Node" parent="states"]
+script = ExtResource("10_em7g5")
+
+[node name="death" type="Node" parent="states"]
