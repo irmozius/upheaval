@@ -2,24 +2,30 @@ extends Node3D
 
 @onready var hurt_box = $HurtBox
 
+var entity
 var active := false
 var dir : Vector3
 var pos : Vector3
 var team : String
 var damage := 5.0
 
-func init(new_pos : Vector3, new_dir : Vector3, t: String, d: float):
+func init(new_pos : Vector3, new_dir : Vector3, t: String, d: float, e):
+	entity = e
 	pos =  new_pos
 	dir = new_dir
 	team = t
 	damage = d
 	
 func _ready():
-	global_position = pos
+	hurt_box.entity = entity
+	hurt_box.team = team
 	hurt_box.damage = damage
-	$MeshInstance3D.show()
 	look_at(dir, Vector3.UP)
+	global_position = pos
+	await get_tree().process_frame
+	$MeshInstance3D.show()
 	active = true
+	hurt_box.active = true
 
 func _physics_process(_delta):
 	if active: global_translate(dir*3)

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cqqsirwtr0awm"
+path="res://.godot/imported/Mega Body Punch 01.wav-485afb700973030f84452d31ec1fb963.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/weapons/Mega Body Punch 01.wav"
+dest_files=["res://.godot/imported/Mega Body Punch 01.wav-485afb700973030f84452d31ec1fb963.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

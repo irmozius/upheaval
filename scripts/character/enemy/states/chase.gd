@@ -14,7 +14,7 @@ func update(_d):
 	if !tracker.target:
 		states.change_state("idle")
 		return
-	rotator.face_dir(tracker.target_pos)
+	rotator.face_dir(tracker.aim_pos)
 	if tracker.target_dis > 12.0:
 		motion.move(tracker.target_dir)
 	else:

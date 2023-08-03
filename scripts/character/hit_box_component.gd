@@ -6,6 +6,6 @@ class_name HitBox extends Area3D
 
 signal hit
 
-func receive_hit(damage : float):
+func receive_hit(damage : float, attacker):
 #	print('hit for %s damage!' % damage)
-	hit.emit(damage)
+	hit.emit(damage, attacker)

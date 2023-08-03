@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://droiglhip8yg4"]
+[gd_scene load_steps=22 format=3 uid="uid://droiglhip8yg4"]
 
 [ext_resource type="Script" path="res://scripts/character/player/player_character.gd" id="1_gryln"]
 [ext_resource type="Script" path="res://scripts/character/player/PlayerInput.gd" id="2_n353x"]
@@ -27,6 +27,9 @@ height = 3.0
 [sub_resource type="PrismMesh" id="PrismMesh_1xsct"]
 size = Vector3(0.715, 1.125, 0.62)
 
+[sub_resource type="LabelSettings" id="LabelSettings_ctxew"]
+font_size = 5
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jvgpw"]
 radius = 1.1
 height = 3.0
@@ -48,11 +51,45 @@ mesh = SubResource("CapsuleMesh_d0yip")
 transform = Transform3D(-4.37114e-08, 0, 1, -0.965926, 0.258819, -4.2222e-08, -0.258819, -0.965926, -1.13133e-08, 0, 0.640016, -0.576599)
 mesh = SubResource("PrismMesh_1xsct")
 
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.235294)
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03125
+anchor_right = 0.625
+anchor_bottom = 0.265625
+text = "Clip: 
+Ammo: "
+label_settings = SubResource("LabelSettings_ctxew")
+metadata/_edit_use_anchors_ = true
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25664, -0.205669)
 
 [node name="WeaponComponent" parent="Camera3D" instance=ExtResource("12_d5cwm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.610955, -0.590029, -0.372336)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336417, -0.64051, -0.372336)
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -300)
@@ -110,26 +147,3 @@ script = ExtResource("15_ckcpl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectableComponent"]
 shape = SubResource("SphereShape3D_7m6k6")
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Crosshair" type="ColorRect" parent="UI"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0.235294)

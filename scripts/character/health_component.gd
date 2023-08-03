@@ -13,7 +13,7 @@ func _ready():
 	if hitbox:
 		hitbox.hit.connect(take_damage)
 
-func take_damage(dam : float):
+func take_damage(dam : float, _e):
 	change_hp(-dam)
 
 func change_hp(amnt : float):

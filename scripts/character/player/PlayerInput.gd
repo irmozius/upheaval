@@ -24,5 +24,9 @@ func actions() -> String:
 		action = "shoot"
 	if Input.is_action_just_pressed("shoot_heavy"):
 		action = "heavy"
+	if Input.is_action_just_pressed("reload"):
+		action = "reload"
+	if Input.is_action_just_pressed("change_wep"):
+		action = "change_wep"
 	
 	return action

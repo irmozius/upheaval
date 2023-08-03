@@ -14,6 +14,7 @@ func _ready():
 	ray_cast_3d.add_exception(area_3d)
 
 func _on_timer_timeout():
+	if !active: return
 	var cols : Array = area_3d.get_overlapping_areas()
 	for i in cols:
 		if i is PlayerDetectable:

@@ -21,7 +21,11 @@ func update(_d):
 			states.change_state("jumping")
 		"shoot":
 			weapon_component.weapon_attack("light")
-	
+		"reload":
+			weapon_component.weapon_reload()
+		"change_wep":
+			weapon_component.change_weapon()
+
 func p_update(_d):
 	pass
 

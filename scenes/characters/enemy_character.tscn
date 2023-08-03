@@ -53,6 +53,7 @@ mesh = SubResource("PrismMesh_ysoxh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.656912, 1.59648, -0.466455)
 
 [node name="WeaponComponent" parent="weapon" instance=ExtResource("14_kehyi")]
+team = "enemy"
 
 [node name="RayCast3D" type="RayCast3D" parent="weapon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.656912, 0.403523, 0.466455)
@@ -99,3 +100,5 @@ script = ExtResource("10_2ky2k")
 script = ExtResource("10_em7g5")
 
 [node name="death" type="Node" parent="states"]
+
+[connection signal="hit" from="HitBoxComponent" to="TargetTrackerComponent" method="_on_hit_box_component_hit"]
