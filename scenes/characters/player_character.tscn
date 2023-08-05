@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://droiglhip8yg4"]
+[gd_scene load_steps=23 format=3 uid="uid://droiglhip8yg4"]
 
 [ext_resource type="Script" path="res://scripts/character/player/player_character.gd" id="1_gryln"]
+[ext_resource type="FontFile" uid="uid://c632mcqrft205" path="res://assets/fonts/TeenyTinyPixls-o2zo.ttf" id="2_2i5ma"]
 [ext_resource type="Script" path="res://scripts/character/player/PlayerInput.gd" id="2_n353x"]
 [ext_resource type="Script" path="res://scripts/character/player/MotionComponent.gd" id="3_b4bgd"]
 [ext_resource type="Script" path="res://scripts/character/player/GravityComponent.gd" id="3_m4a0o"]
@@ -28,13 +29,16 @@ height = 3.0
 size = Vector3(0.715, 1.125, 0.62)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ctxew"]
+font = ExtResource("2_2i5ma")
 font_size = 5
+shadow_size = 0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jvgpw"]
 radius = 1.1
 height = 3.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7m6k6"]
+radius = 1.32499
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 script = ExtResource("1_gryln")
@@ -78,8 +82,9 @@ color = Color(1, 1, 1, 0.235294)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.03125
+anchor_top = 0.03125
 anchor_right = 0.625
-anchor_bottom = 0.265625
+anchor_bottom = 0.3125
 text = "Clip: 
 Ammo: "
 label_settings = SubResource("LabelSettings_ctxew")

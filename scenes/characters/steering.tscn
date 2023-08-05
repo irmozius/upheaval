@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://by1x4o7t22356"]
+
+[ext_resource type="Script" path="res://scripts/character/steering.gd" id="1_pfi41"]
+
+[node name="steering" type="Node3D"]
+script = ExtResource("1_pfi41")
+
+[node name="casts" type="Node3D" parent="."]
+
+[node name="1" type="RayCast3D" parent="casts"]
+target_position = Vector3(0, 0, -9)
+
+[node name="2" type="RayCast3D" parent="casts"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+target_position = Vector3(0, 0, -9)
+
+[node name="3" type="RayCast3D" parent="casts"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
+target_position = Vector3(0, 0, -9)
+
+[node name="4" type="RayCast3D" parent="casts"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 0, 0, 0)
+target_position = Vector3(0, 0, -9)
+
+[node name="5" type="RayCast3D" parent="casts"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
+target_position = Vector3(0, 0, -9)
+
+[node name="6" type="RayCast3D" parent="casts"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0, 0, 0)
+target_position = Vector3(0, 0, -9)
+
+[node name="7" type="RayCast3D" parent="casts"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
+target_position = Vector3(0, 0, -9)
+
+[node name="8" type="RayCast3D" parent="casts"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+target_position = Vector3(0, 0, -9)

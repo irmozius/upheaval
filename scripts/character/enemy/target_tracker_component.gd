@@ -26,9 +26,9 @@ func _process(_delta):
 		target_dir = pos.direction_to(target_pos)
 		target_dis = pos.distance_to(target_pos)
 
-func _on_hit_box_component_hit(_d, entity):
+func _on_hit_box_component_hit(_d, e):
 	if target: return
-	if !entity: return
-	set_target(entity)
+	if !e: return
+	set_target(e)
 	ai_detection_component.timer.stop()
 	ai_detection_component.active = false

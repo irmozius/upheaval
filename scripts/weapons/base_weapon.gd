@@ -76,6 +76,7 @@ func update_stockpile(amnt):
 			weapons.heavy_ammo = amnt
 
 func reload():
+	if clip == clip_size: return
 	can_fire = false
 	lerp_back = false
 	reloading = true
@@ -115,7 +116,7 @@ func minus_ammo():
 	update_stockpile(ammo)
 	update_ammo_display()
 
-func _process(delta):
+func _process(_delta):
 	lerp_pos()
 	
 func lerp_pos():
@@ -128,7 +129,7 @@ func update_ammo_display():
 	if !weapons.team == "player": return
 	var lab : Label = weapons.ammo_lab
 	var ammo = get_stockpile()
-	lab.text = str("Clip: %s\nAmmo: %s" % [clip, ammo])
+	lab.text = str("Clip: %s" % clip)
 
 func muzzle_flare():
 	flare.rotate_z(randf())

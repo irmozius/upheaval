@@ -4,9 +4,10 @@ extends Node
 @onready var states = $".."
 @onready var motion = $"../../MotionComponent"
 @onready var tracker = $"../../TargetTrackerComponent"
+@onready var anim = $"../../AnimationComponent"
 
 func enter():
-	pass
+	anim.play("idle")
 
 func update(_d):
 	motion.move(Vector3.ZERO)

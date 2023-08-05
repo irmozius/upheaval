@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://1au4ta27rmw3"]
+
+[ext_resource type="Script" path="res://scripts/env/screen.gd" id="1_7f3pd"]
+[ext_resource type="FontFile" uid="uid://c632mcqrft205" path="res://assets/fonts/TeenyTinyPixls-o2zo.ttf" id="1_ju5u2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24vwi"]
+resource_local_to_scene = true
+albedo_color = Color(1, 1, 1, 0)
+metallic = 0.7
+metallic_specular = 0.7
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.11
+
+[sub_resource type="BoxMesh" id="BoxMesh_60nhy"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_24vwi")
+size = Vector3(2.355, 1.31, 0.045)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wk205"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_65w3l"]
+material = SubResource("StandardMaterial3D_wk205")
+size = Vector3(0.045, 1.35, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_babff"]
+material = SubResource("StandardMaterial3D_wk205")
+size = Vector3(0.045, 2.395, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_odjr7"]
+albedo_color = Color(0.309804, 0.901961, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_k7dlu"]
+material = SubResource("StandardMaterial3D_odjr7")
+size = Vector2(0.02, 0.02)
+
+[node name="Screen" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_60nhy")
+script = ExtResource("1_7f3pd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18118, 0, 0)
+mesh = SubResource("BoxMesh_65w3l")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17373, 0, 0)
+mesh = SubResource("BoxMesh_65w3l")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.000311852, 0.662154, 0)
+mesh = SubResource("BoxMesh_babff")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.000311852, -0.665342, 0)
+mesh = SubResource("BoxMesh_babff")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.09159, -0.664458, 0.0263506)
+mesh = SubResource("QuadMesh_k7dlu")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0436001, 0, 0.02993)
+pixel_size = 0.0026
+modulate = Color(0, 0, 0, 1)
+text = "welcome"
+font = ExtResource("1_ju5u2")
+font_size = 122
+outline_size = 0

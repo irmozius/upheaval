@@ -1,13 +1,18 @@
 class_name MotionComponent extends Node3D
 
-@onready var entity = $".."
-
 @export var speed := 9.0
+
+@onready var entity = $".."
+@onready var anim = $"../AnimationComponent"
+@onready var steering_component = $"../SteeringComponent"
 
 var velocity : Vector3
 
 func move(direction : Vector3):
 	if direction != Vector3.ZERO:
+		var pos := global_position
+		if steering_component:
+			direction = steering_component.calculate_path(pos + direction)
 		velocity = direction * speed
 #		velocity.x = direction.x * speed
 #		velocity.z = direction.z * speed

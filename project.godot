@@ -22,6 +22,10 @@ window/size/viewport_height=64
 window/size/mode=2
 window/stretch/mode="viewport"
 
+[gui]
+
+fonts/dynamic_fonts/use_oversampling=false
+
 [input]
 
 mv_up={

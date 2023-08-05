@@ -12,9 +12,7 @@ script = ExtResource("1_8ukbn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 target_position = Vector3(0, 0, -50)
 collision_mask = 5
-hit_from_inside = true
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 0

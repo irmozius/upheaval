@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=3 uid="uid://bevn6b2grh5s"]
+
+[ext_resource type="Script" path="res://scripts/character/enemy/grabber_tentacle.gd" id="1_051nx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1x4yh"]
+cull_mode = 2
+albedo_color = Color(0.760784, 0.333333, 0.360784, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8nvhq"]
+material = SubResource("StandardMaterial3D_1x4yh")
+size = Vector2(0.135, 2)
+
+[sub_resource type="Animation" id="Animation_ndyni"]
+resource_name = "extend"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("root:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.08, 0.44, 0.03), Vector3(0.855, 0.44, 0.03), Vector3(4.654, 3, 12), Vector3(4.487, 4, 15), Vector3(0.08, 0.44, 0.03)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("root:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.65, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.174533, 0, 0), Vector3(-0.174533, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kdw1d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("root:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.08, 0.44, 0.03)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("root:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xgmte"]
+_data = {
+"RESET": SubResource("Animation_kdw1d"),
+"extend": SubResource("Animation_ndyni")
+}
+
+[node name="grabber_tentacle" type="Node3D"]
+script = ExtResource("1_051nx")
+
+[node name="root" type="Node3D" parent="."]
+transform = Transform3D(0.08, 0, 0, 0, 0.44, 0, 0, 0, 0.03, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="root"]
+transform = Transform3D(-3.09086e-08, 0.707107, 0.707107, -1, -4.37114e-08, 0, 3.09086e-08, -0.707107, 0.707107, -0.707107, 0, -0.707107)
+mesh = SubResource("PlaneMesh_8nvhq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="root"]
+transform = Transform3D(-3.09086e-08, 0.707107, -0.707107, -1, -4.37114e-08, 0, -3.09086e-08, 0.707107, 0.707107, -0.707107, 0, -2.11789)
+mesh = SubResource("PlaneMesh_8nvhq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="root"]
+transform = Transform3D(3.09086e-08, -0.707107, 0.707106, -0.999999, -4.37114e-08, 4.81269e-22, 3.09086e-08, -0.707107, -0.707107, 0.702003, 0, -0.707107)
+visible = false
+mesh = SubResource("PlaneMesh_8nvhq")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="root"]
+transform = Transform3D(3.09086e-08, -0.707106, -0.707106, -0.999997, -4.37113e-08, 1.42735e-15, -3.09086e-08, 0.707106, -0.707107, 0.707995, 0, -2.14416)
+visible = false
+mesh = SubResource("PlaneMesh_8nvhq")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xgmte")
+}

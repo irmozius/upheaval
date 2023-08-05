@@ -23,9 +23,10 @@ func _ready():
 	look_at(dir, Vector3.UP)
 	global_position = pos
 	await get_tree().process_frame
-	$MeshInstance3D.show()
 	active = true
 	hurt_box.active = true
+#	await get_tree().process_frame
+	$MeshInstance3D.show()
 
 func _physics_process(_delta):
 	if active: global_translate(dir*3)

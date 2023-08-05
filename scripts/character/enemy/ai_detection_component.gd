@@ -12,6 +12,7 @@ var active := true
 
 func _ready():
 	ray_cast_3d.add_exception(area_3d)
+	ray_cast_3d.add_exception(entity)
 
 func _on_timer_timeout():
 	if !active: return
