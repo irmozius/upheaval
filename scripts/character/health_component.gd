@@ -24,9 +24,12 @@ func change_hp(amnt : float):
 		die()
 
 func die():
-	if entity is PlayerCharacter: get_tree().get_first_node_in_group("dead_screen").show()
 	if sounds:
 		sounds.stop_barks()
-	states.change_state("death")
+	if !entity is PlayerCharacter:
+		states.change_state("death")
 	died.emit()
 	entity.remove_pieces()
+	if entity is PlayerCharacter:
+		get_tree().get_first_node_in_group("dead_screen").show()
+		entity.queue_free()

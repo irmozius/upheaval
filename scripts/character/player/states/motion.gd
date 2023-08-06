@@ -4,11 +4,15 @@ extends Node
 @onready var states = $".."
 @onready var motion = $"../../MotionComponent"
 @onready var weapon_component = $"../../Camera3D/WeaponComponent"
+@onready var health_component = $"../../HealthComponent"
+
 
 func enter():
 	pass
 
 func update(_d):
+	if health_component.hp <= 0.0:
+		return
 	var motion_input = player_input.movement()
 	
 	motion.move(motion_input)
