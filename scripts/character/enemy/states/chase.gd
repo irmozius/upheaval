@@ -8,11 +8,18 @@ extends Node
 @onready var rotator = $"../../RotatorComponent"
 @onready var weapon = $"../../weapon/WeaponComponent"
 @onready var anim = $"../../AnimationComponent"
+@onready var sounds_component = $"../../SoundsComponent"
+@onready var health_component = $"../../HealthComponent"
+
+func _ready():
+	weapon = get_node("../../weapon/WeaponComponent")
 
 func enter():
-	pass
+	sounds_component.start_barks()
 	
 func update(_d):
+	if health_component.hp <= 0.0:
+		return
 	if !tracker.target:
 		states.change_state("idle")
 		return
@@ -26,6 +33,7 @@ func update(_d):
 	if tracker.target_dis < decider.max_range:
 		var decision : AttackEntry = decider.decide()
 		if !decision: return
+		sounds_component.stop_barks()
 		match decision.type:
 			"Animation":
 				states.get_node("attack_anim").a_name = decision.anim_name

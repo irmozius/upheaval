@@ -29,4 +29,4 @@ func anim_end(_anim_name):
 	states.change_state("idle")
 
 func exit():
-	pass
+	active = false

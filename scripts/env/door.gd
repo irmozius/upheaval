@@ -3,6 +3,7 @@ extends Node3D
 @export var open := false
 @export var locked := false
 @onready var screen = $middle/Screen
+@onready var opensnd = $middle/open
 
 @onready var middle : MeshInstance3D = $middle
 @onready var area_3d = $Area3D
@@ -16,6 +17,7 @@ func _ready():
 		area_3d.queue_free()
 
 func open_door():
+	opensnd.play()
 	var t := create_tween()
 	t.tween_property(middle, 'position:y', 13.0, 1.0).set_trans(Tween.TRANS_SPRING)
 	

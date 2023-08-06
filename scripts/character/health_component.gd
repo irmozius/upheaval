@@ -4,6 +4,8 @@ extends Node
 
 @export var hitbox : HitBox
 @export var max_hp := 100.0
+@onready var states = $"../states"
+@onready var sounds = $"../SoundsComponent"
 
 var hp := 100.0
 
@@ -23,6 +25,8 @@ func change_hp(amnt : float):
 
 func die():
 	if entity is PlayerCharacter: get_tree().get_first_node_in_group("dead_screen").show()
+	if sounds:
+		sounds.stop_barks()
+	states.change_state("death")
 	died.emit()
 	entity.remove_pieces()
-	entity.queue_free()

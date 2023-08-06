@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://laeko1hy6q7a"]
+[gd_scene load_steps=22 format=3 uid="uid://laeko1hy6q7a"]
 
 [ext_resource type="Script" path="res://scripts/env/door.gd" id="1_k1ugj"]
 [ext_resource type="Texture2D" uid="uid://4rsrhm5ff0w4" path="res://assets/textures/MetalPlates006_1K-JPG/MetalPlates006_1K_Color.jpg" id="1_wk3he"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d1b76rlrl8iga" path="res://assets/textures/PaintedMetal016_1K-JPG/PaintedMetal016_1K_NormalGL.jpg" id="4_0cuft"]
 [ext_resource type="PackedScene" uid="uid://1au4ta27rmw3" path="res://scenes/env/screen.tscn" id="4_a7x1g"]
 [ext_resource type="Texture2D" uid="uid://dhv42jrnoiwvx" path="res://assets/textures/CorrugatedSteel005_1K-JPG/CorrugatedSteel005_1K_NormalGL.jpg" id="4_a125j"]
+[ext_resource type="AudioStream" uid="uid://qxcyf78fukpc" path="res://assets/audio/amb/door.wav" id="5_dmsk2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rs5pl"]
 albedo_texture = ExtResource("1_wk3he")
@@ -27,10 +28,15 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.6
 
-[sub_resource type="BoxMesh" id="BoxMesh_7jkdg"]
+[sub_resource type="BoxMesh" id="BoxMesh_rdj8h"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_ttwqj")
 size = Vector3(2.355, 1.31, 0.045)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lit8f"]
+streams_count = 1
+stream_0/stream = ExtResource("5_dmsk2")
+stream_0/weight = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xgtjy"]
 albedo_color = Color(0.67451, 0.67451, 0.67451, 1)
@@ -76,10 +82,18 @@ shape = SubResource("ConcavePolygonShape3D_fvc8s")
 
 [node name="Screen" parent="middle" instance=ExtResource("4_a7x1g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.59542, 0.500245)
-mesh = SubResource("BoxMesh_7jkdg")
+mesh = SubResource("BoxMesh_rdj8h")
 skeleton = NodePath("../..")
 msg = "Enter"
 s_colour = Color(0.537255, 0.819608, 0.454902, 1)
+
+[node name="open" type="AudioStreamPlayer3D" parent="middle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+stream = SubResource("AudioStreamRandomizer_lit8f")
+volume_db = -16.943
+pitch_scale = 0.5
+max_distance = 39.75
+bus = &"Room"
 
 [node name="side" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, 0)

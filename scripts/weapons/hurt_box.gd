@@ -9,11 +9,10 @@ var damage := 5.0
 signal wall_hit
 signal enemy_hit
 
-func hit_wall(_body):
-	wall_hit.emit()
+func hit_wall(body):
+	if body is StaticBody3D: wall_hit.emit()
 
 func get_hits():
-	if !active: return
 	var cols = get_overlapping_areas()
 	for area in cols:
 		if area is HitBox:
@@ -21,7 +20,6 @@ func get_hits():
 				print('hit')
 				area.receive_hit(damage, entity)
 				enemy_hit.emit(area)
-
 
 func _on_area_entered(area):
 	if !active: return

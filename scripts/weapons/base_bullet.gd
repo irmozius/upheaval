@@ -1,5 +1,6 @@
 extends Node3D
 
+@export var speed := 3.0
 @onready var hurt_box = $HurtBox
 
 var entity
@@ -27,9 +28,12 @@ func _ready():
 	hurt_box.active = true
 #	await get_tree().process_frame
 	$MeshInstance3D.show()
+	
+func _process(delta):
+	print(global_position)
 
 func _physics_process(_delta):
-	if active: global_translate(dir*3)
+	if active: global_translate(dir*speed)
 
 func _on_hurt_box_wall_hit():
 	queue_free.call_deferred()

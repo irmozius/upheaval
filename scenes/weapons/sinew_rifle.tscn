@@ -733,4 +733,5 @@ attenuation_model = 1
 unit_size = 20.0
 pitch_scale = 1.55
 max_distance = 100.0
+bus = &"Room"
 script = ExtResource("5_n2juy")

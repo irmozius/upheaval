@@ -633,4 +633,5 @@ skeleton = NodePath("")
 stream = SubResource("AudioStreamRandomizer_offvl")
 unit_size = 20.0
 max_distance = 100.0
+bus = &"Room"
 script = ExtResource("5_u8m6b")
