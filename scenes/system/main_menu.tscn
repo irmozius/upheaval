@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://xc1wl1jpnb4"]
+
+[ext_resource type="Script" path="res://scripts/system/main_menu.gd" id="1_2gewk"]
+[ext_resource type="FontFile" uid="uid://c632mcqrft205" path="res://assets/fonts/TeenyTinyPixls-o2zo.ttf" id="2_cwtiy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0phbh"]
+font = ExtResource("2_cwtiy")
+font_size = 8
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2gewk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "UPHEAVAL"
+label_settings = SubResource("LabelSettings_0phbh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_cwtiy")
+theme_override_font_sizes/font_size = 7
+text = "BEGIN"
+
+[connection signal="pressed" from="VBoxContainer/start" to="." method="_on_button_pressed"]

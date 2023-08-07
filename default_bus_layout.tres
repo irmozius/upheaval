@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://7ntcrt2p0o74"]
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://7ntcrt2p0o74"]
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_2qe31"]
 resource_name = "Compressor"
@@ -11,6 +11,12 @@ room_size = 0.2
 damping = 0.1
 wet = 0.07
 
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_2s5rp"]
+resource_name = "Compressor"
+threshold = -4.0
+ratio = 12.0
+gain = 4.0
+
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectCompressor_2qe31")
 bus/0/effect/0/enabled = true
@@ -22,9 +28,11 @@ bus/1/volume_db = 0.0
 bus/1/send = &"Master"
 bus/1/effect/0/effect = SubResource("AudioEffectReverb_brg6g")
 bus/1/effect/0/enabled = true
-bus/2/name = &"New Bus 2"
+bus/2/name = &"Music"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectCompressor_2s5rp")
+bus/2/effect/0/enabled = true

@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Upheaval"
-run/main_scene="res://scenes/env/world.tscn"
+run/main_scene="res://scenes/system/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+MusicManager="*res://scenes/system/music_manager.tscn"
 
 [display]
 
@@ -21,6 +25,10 @@ window/size/viewport_width=64
 window/size/viewport_height=64
 window/size/mode=2
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/meta_player/plugin.cfg")
 
 [gui]
 
@@ -79,3 +87,4 @@ change_wep={
 3d_physics/layer_1="Geom"
 3d_physics/layer_2="HitDetection"
 3d_physics/layer_3="EntityDetection"
+3d_physics/layer_4="FearEmitters"

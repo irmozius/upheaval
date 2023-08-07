@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c1w3ux1cdudw"]
+
+[node name="FearEmitter" type="Area3D"]
+collision_layer = 8
+collision_mask = 0
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]

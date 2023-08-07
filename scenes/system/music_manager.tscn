@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3 uid="uid://bt63qirya23fi"]
+
+[ext_resource type="AudioStream" uid="uid://qp5ox2qccgw3" path="res://assets/audio/music/staff_dorm/staff_dorms_Pigments.ogg" id="1_2k6od"]
+[ext_resource type="Script" path="res://scripts/system/music_manager.gd" id="1_hoj21"]
+[ext_resource type="Script" path="res://addons/meta_player/meta_player.gd" id="2_f8bo4"]
+[ext_resource type="AudioStream" uid="uid://bn75y0vjlfrda" path="res://assets/audio/music/staff_dorm/staff_dorms_Strings.ogg" id="4_ii0nb"]
+[ext_resource type="AudioStream" uid="uid://d13xdo6lfp54o" path="res://assets/audio/music/staff_dorm/staff_dorms_EDrum.ogg" id="5_pkgjm"]
+[ext_resource type="AudioStream" uid="uid://bbixnhvnkxf2f" path="res://assets/audio/music/staff_dorm/staff_dorms_Screech.ogg" id="6_oo2sb"]
+[ext_resource type="Script" path="res://addons/meta_player/range_fade.gd" id="7_4vqhb"]
+[ext_resource type="AudioStream" uid="uid://bfq1tbebhy8jt" path="res://assets/audio/music/staff_dorm/staff_dorms_SynGtr.ogg" id="7_qyfwb"]
+[ext_resource type="AudioStream" uid="uid://cyuud5bx8j7j5" path="res://assets/audio/music/staff_dorm/staff_dorms_Bass.ogg" id="8_yk0he"]
+[ext_resource type="AudioStream" uid="uid://dfb6hh63jft3t" path="res://assets/audio/music/staff_dorm/staff_dorms_DRUMS.ogg" id="9_1awe1"]
+
+[sub_resource type="Resource" id="Resource_0gw7g"]
+script = ExtResource("7_4vqhb")
+val_min = 0.0
+val_max = 0.3
+invert = false
+
+[sub_resource type="Resource" id="Resource_6cd7j"]
+script = ExtResource("7_4vqhb")
+val_min = 1.0
+val_max = 2.5
+invert = false
+
+[sub_resource type="Resource" id="Resource_wig3h"]
+script = ExtResource("7_4vqhb")
+val_min = 2.0
+val_max = 2.8
+invert = false
+
+[sub_resource type="Resource" id="Resource_rgdum"]
+script = ExtResource("7_4vqhb")
+val_min = 3.0
+val_max = 3.6
+invert = false
+
+[node name="MusicManager" type="Node"]
+script = ExtResource("1_hoj21")
+
+[node name="drop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_2k6od")
+script = ExtResource("2_f8bo4")
+bars = 4
+
+[node name="strings" type="AudioStreamPlayer" parent="drop"]
+stream = ExtResource("4_ii0nb")
+script = ExtResource("2_f8bo4")
+bars = 4
+
+[node name="edrum" type="AudioStreamPlayer" parent="drop"]
+stream = ExtResource("5_pkgjm")
+script = ExtResource("2_f8bo4")
+bars = 4
+
+[node name="screech" type="AudioStreamPlayer" parent="drop" node_paths=PackedStringArray("target")]
+stream = ExtResource("6_oo2sb")
+bus = &"Music"
+script = ExtResource("2_f8bo4")
+loop = false
+bars = 4
+automate_volume = true
+target = NodePath("../..")
+target_param = "danger"
+param_smooth = 1.0
+automation_rule = SubResource("Resource_0gw7g")
+seek_up_weight = 1.225
+seek_down_weight = 0.385
+
+[node name="syngtr" type="AudioStreamPlayer" parent="drop" node_paths=PackedStringArray("target")]
+stream = ExtResource("7_qyfwb")
+bus = &"Music"
+script = ExtResource("2_f8bo4")
+loop = false
+bars = 4
+automate_volume = true
+target = NodePath("../..")
+target_param = "danger"
+param_smooth = 1.0
+automation_rule = SubResource("Resource_6cd7j")
+seek_up_weight = 1.225
+seek_down_weight = 0.385
+
+[node name="bass" type="AudioStreamPlayer" parent="drop" node_paths=PackedStringArray("target")]
+stream = ExtResource("8_yk0he")
+bus = &"Music"
+script = ExtResource("2_f8bo4")
+loop = false
+bars = 4
+automate_volume = true
+target = NodePath("../..")
+target_param = "danger"
+param_smooth = 1.0
+automation_rule = SubResource("Resource_wig3h")
+seek_up_weight = 1.225
+seek_down_weight = 0.385
+
+[node name="drums" type="AudioStreamPlayer" parent="drop" node_paths=PackedStringArray("target")]
+stream = ExtResource("9_1awe1")
+bus = &"Music"
+script = ExtResource("2_f8bo4")
+loop = false
+bars = 4
+automate_volume = true
+target = NodePath("../..")
+target_param = "danger"
+param_smooth = 1.0
+automation_rule = SubResource("Resource_rgdum")
+seek_up_weight = 1.225
+seek_down_weight = 0.385

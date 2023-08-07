@@ -1,5 +1,7 @@
 class_name AI_Tracker extends Node3D
 
+@export var danger_level := 1.0
+
 @onready var entity = $".."
 @onready var ai_detection_component = $"../AIDetectionComponent"
 
@@ -11,6 +13,7 @@ var aim_pos : Vector3
 
 func set_target(t):
 	if target: return
+	MusicManager.danger += danger_level
 	target = t
 #	aim_pos = t.global_position + 
 	target.get_node("HealthComponent").died.connect(target_death)

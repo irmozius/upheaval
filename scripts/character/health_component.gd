@@ -6,6 +6,7 @@ extends Node
 @export var max_hp := 100.0
 @onready var states = $"../states"
 @onready var sounds = $"../SoundsComponent"
+@onready var tracker = $"../TargetTrackerComponent"
 
 var hp := 100.0
 
@@ -24,6 +25,8 @@ func change_hp(amnt : float):
 		die()
 
 func die():
+	if tracker:
+		MusicManager.danger -= tracker.danger_level
 	if sounds:
 		sounds.stop_barks()
 	if !entity is PlayerCharacter:
