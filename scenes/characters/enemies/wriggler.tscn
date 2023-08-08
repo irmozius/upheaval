@@ -11,11 +11,12 @@
 [ext_resource type="AudioStream" uid="uid://brlcu8or7prn" path="res://assets/audio/character/wriggler/hiss-003.wav" id="12_y5fu7"]
 [ext_resource type="AudioStream" uid="uid://iwe5n16ni21l" path="res://assets/audio/character/wriggler/spit.wav" id="14_3ek6d"]
 [ext_resource type="Script" path="res://scripts/character/enemy/AnimationComponent.gd" id="14_gs2vi"]
+[ext_resource type="AudioStream" uid="uid://vero0uovbv3t" path="res://assets/audio/character/wriggler/spit-001.wav" id="14_n3sjn"]
+[ext_resource type="AudioStream" uid="uid://cxu0nfj81gsjg" path="res://assets/audio/character/wriggler/spit-002.wav" id="15_vql4c"]
 [ext_resource type="Script" path="res://scripts/character/player/GravityComponent.gd" id="15_xm5uw"]
+[ext_resource type="AudioStream" uid="uid://cvhgt65khqsju" path="res://assets/audio/character/wriggler/spit-003.wav" id="16_6cvwx"]
 [ext_resource type="PackedScene" uid="uid://b3r7mpl8be58s" path="res://scenes/characters/sounds_component.tscn" id="16_nahny"]
 [ext_resource type="Script" path="res://scripts/system/spawn_snd.gd" id="23_dk4wd"]
-[ext_resource type="AudioStream" uid="uid://cdpw3ls5fbhiy" path="res://assets/audio/character/grabber/vomit.wav" id="27_wqqc3"]
-[ext_resource type="AudioStream" uid="uid://ceokd41yg1d34" path="res://assets/audio/character/grabber/death.wav" id="28_uhvtu"]
 [ext_resource type="Script" path="res://scripts/character/JumpComponent.gd" id="29_j863c"]
 [ext_resource type="Script" path="res://scripts/character/player/MotionComponent.gd" id="30_bxw7d"]
 [ext_resource type="Script" path="res://scripts/character/player/RotatorComponent.gd" id="31_7f75b"]
@@ -165,19 +166,18 @@ stream_1/weight = 1.0
 stream_2/stream = ExtResource("12_y5fu7")
 stream_2/weight = 1.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4wft7"]
+streams_count = 3
+stream_0/stream = ExtResource("14_n3sjn")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("15_vql4c")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("16_6cvwx")
+stream_2/weight = 1.0
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4s133"]
 streams_count = 1
 stream_0/stream = ExtResource("14_3ek6d")
-stream_0/weight = 1.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_00sqx"]
-streams_count = 1
-stream_0/stream = ExtResource("27_wqqc3")
-stream_0/weight = 1.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wortb"]
-streams_count = 1
-stream_0/stream = ExtResource("28_uhvtu")
 stream_0/weight = 1.0
 
 [sub_resource type="Resource" id="Resource_rinst"]
@@ -301,7 +301,7 @@ mesh = SubResource("ArrayMesh_shl3s")
 skin = SubResource("Skin_5m7b0")
 
 [node name="MouthAttach" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(1, -9.14002e-17, 2.28853e-17, 7.81009e-17, 0.939952, 0.341308, -5.27066e-17, -0.341308, 0.939952, -1.79998e-15, 7.68683, -0.0703685)
+transform = Transform3D(1, -9.14004e-17, 2.2885e-17, 7.81012e-17, 0.939952, 0.341307, -5.27064e-17, -0.341307, 0.939952, -1.79998e-15, 7.68683, -0.0703665)
 bone_name = "Jaw"
 bone_idx = 12
 
@@ -334,27 +334,16 @@ bus = &"Room"
 script = ExtResource("23_dk4wd")
 
 [node name="shoot" type="AudioStreamPlayer3D" parent="SoundsComponent"]
-stream = SubResource("AudioStreamRandomizer_4s133")
-volume_db = -4.319
-unit_size = 12.0
-pitch_scale = 1.9
-max_distance = 70.0
-bus = &"Room"
-script = ExtResource("23_dk4wd")
-
-[node name="vomit" type="AudioStreamPlayer3D" parent="SoundsComponent"]
-stream = SubResource("AudioStreamRandomizer_00sqx")
-volume_db = 2.98
-unit_size = 16.0
-pitch_scale = 0.5
+stream = SubResource("AudioStreamRandomizer_4wft7")
+volume_db = 3.52
+unit_size = 15.85
+pitch_scale = 1.81
 max_distance = 70.0
 bus = &"Room"
 script = ExtResource("23_dk4wd")
 
 [node name="death" type="AudioStreamPlayer3D" parent="SoundsComponent"]
-stream = SubResource("AudioStreamRandomizer_wortb")
-volume_db = 2.98
-unit_size = 16.0
+stream = SubResource("AudioStreamRandomizer_4s133")
 pitch_scale = 1.2
 max_distance = 70.0
 bus = &"Room"
@@ -367,9 +356,11 @@ one_shot = true
 script = ExtResource("29_j863c")
 jump_velocity = 30.0
 
-[node name="MotionComponent" type="Node3D" parent="."]
+[node name="MotionComponent" type="Node3D" parent="." node_paths=PackedStringArray("anim", "steering")]
 script = ExtResource("30_bxw7d")
 speed = 13.0
+anim = NodePath("../AnimationComponent")
+steering = NodePath("../SteeringComponent")
 
 [node name="RotatorComponent" type="Node3D" parent="."]
 script = ExtResource("31_7f75b")
@@ -390,8 +381,10 @@ one_shot = true
 
 [node name="TargetTrackerComponent" parent="." instance=ExtResource("36_y15sp")]
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("37_84yqo")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hitbox", "sounds", "tracker") instance=ExtResource("37_84yqo")]
 hitbox = NodePath("../HitBoxComponent")
+sounds = NodePath("../SoundsComponent")
+tracker = NodePath("../TargetTrackerComponent")
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("38_nff8c")]
 

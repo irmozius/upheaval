@@ -118,8 +118,6 @@ func _process(delta):
 				fade_to(get_range_vol())
 			else:
 				fade_to(get_dis_vol())
-			if name == "screech":
-				print(str(volume_db))
 
 func calc_beat(_delta):
 	if !copy: return

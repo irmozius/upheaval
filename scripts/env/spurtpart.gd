@@ -15,7 +15,7 @@ func _ready():
 	await get_tree().create_timer(0.8).timeout
 	queue_free()
 	
-func _process(delta):
+func _process(_delta):
 	if !part: return
 	global_position = part.global_position
 	global_rotation = part.global_rotation

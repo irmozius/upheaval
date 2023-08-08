@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5gn7i4lyaqri"]
+
+[ext_resource type="Script" path="res://scripts/system/zonescan.gd" id="1_o1e1r"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_38lul"]
+radius = 0.2
+
+[node name="zonescan" type="Area3D"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_o1e1r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_38lul")

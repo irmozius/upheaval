@@ -17,7 +17,6 @@ func get_hits():
 	for area in cols:
 		if area is HitBox:
 			if area.team != team:
-				print('hit')
 				area.receive_hit(damage, entity)
 				enemy_hit.emit(area)
 

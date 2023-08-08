@@ -9,6 +9,12 @@ func _input(event):
 		rot.x *= -1
 		rotator_component.rotate_entity(rot)
 
+func _process(_delta):
+	var rot_input = Input.get_vector("lk_left","lk_right","lk_up","lk_dw")
+	rot_input.x = -rot_input.x
+	rot_input *= 0.4
+	rotator_component.rotate_entity(rot_input)
+
 func movement() -> Vector3:
 	var input_dir = Input.get_vector("mv_left", "mv_right", "mv_up", "mv_down")
 	var direction = (player.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

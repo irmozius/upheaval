@@ -28,9 +28,6 @@ func _ready():
 	hurt_box.active = true
 #	await get_tree().process_frame
 	$MeshInstance3D.show()
-	
-func _process(delta):
-	print(global_position)
 
 func _physics_process(_delta):
 	if active: global_translate(dir*speed)

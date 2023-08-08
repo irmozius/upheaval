@@ -25,7 +25,7 @@ func spawn_weapon(n : int):
 	await tween_weapon_spawn(true).finished
 	w.disabled = false
 	
-func weapon_attack(type : String):
+func weapon_attack(_type : String):
 	weapon.shoot()
 
 func weapon_reload():

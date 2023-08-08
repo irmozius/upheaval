@@ -488,7 +488,7 @@ mesh = SubResource("ArrayMesh_u8hav")
 skin = SubResource("Skin_7xw3q")
 
 [node name="SpineAtt" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.996116, 0.0879642, -0.00395939, -0.0879543, 0.996121, 0.00260695, 0.00417335, -0.00224858, 0.999989, 0.0539808, 8.12314, -0.00381189)
+transform = Transform3D(0.996116, 0.0879643, -0.00395937, -0.0879544, 0.996121, 0.00260702, 0.00417334, -0.00224865, 0.999989, 0.0539813, 8.12315, -0.00381203)
 bone_name = "Spine2"
 bone_idx = 2
 
@@ -540,7 +540,7 @@ draw_pass_1 = SubResource("PlaneMesh_4wrwd")
 script = ExtResource("5_aphh2")
 
 [node name="FaceAtt" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.977795, -0.165173, -0.128976, 0.158804, 0.985589, -0.0582691, 0.136742, 0.0364935, 0.989934, 0.233547, 10.1566, -0.00840204)
+transform = Transform3D(0.977795, -0.165173, -0.128976, 0.158804, 0.985589, -0.0582691, 0.136742, 0.0364934, 0.989934, 0.233548, 10.1566, -0.00840231)
 bone_name = "Head"
 bone_idx = 4
 
@@ -615,9 +615,11 @@ one_shot = true
 script = ExtResource("4_cj3qb")
 jump_velocity = 30.0
 
-[node name="MotionComponent" type="Node3D" parent="."]
+[node name="MotionComponent" type="Node3D" parent="." node_paths=PackedStringArray("anim", "steering")]
 script = ExtResource("5_t31ei")
 speed = 10.0
+anim = NodePath("../AnimationComponent")
+steering = NodePath("../SteeringComponent")
 
 [node name="RotatorComponent" type="Node3D" parent="."]
 script = ExtResource("6_kx1n0")
@@ -638,8 +640,10 @@ one_shot = true
 
 [node name="TargetTrackerComponent" parent="." instance=ExtResource("8_lwxl7")]
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("9_3q7mo")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hitbox", "sounds", "tracker") instance=ExtResource("9_3q7mo")]
 hitbox = NodePath("../HitBoxComponent")
+sounds = NodePath("../SoundsComponent")
+tracker = NodePath("../TargetTrackerComponent")
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("10_t7sh3")]
 

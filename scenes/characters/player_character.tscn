@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://droiglhip8yg4"]
+[gd_scene load_steps=31 format=3 uid="uid://droiglhip8yg4"]
 
 [ext_resource type="Script" path="res://scripts/character/player/player_character.gd" id="1_gryln"]
 [ext_resource type="FontFile" uid="uid://c632mcqrft205" path="res://assets/fonts/TeenyTinyPixls-o2zo.ttf" id="2_2i5ma"]
@@ -11,11 +11,18 @@
 [ext_resource type="Script" path="res://scripts/character/player/states/motion.gd" id="7_bloci"]
 [ext_resource type="Script" path="res://scripts/character/JumpComponent.gd" id="7_kmhjy"]
 [ext_resource type="PackedScene" uid="uid://5ps3vjr4qnob" path="res://scenes/characters/health_component.tscn" id="8_hy55j"]
+[ext_resource type="PackedScene" uid="uid://dmv2u8h2wlp13" path="res://scenes/characters/footstep_component.tscn" id="9_nxrw0"]
 [ext_resource type="Script" path="res://scripts/character/player/states/jumping.gd" id="9_qrxjv"]
+[ext_resource type="AudioStream" uid="uid://cpftr7o0ywguf" path="res://assets/audio/amb/steps/step-001.wav" id="10_kkh80"]
 [ext_resource type="Script" path="res://scripts/character/player/states/falling.gd" id="11_10w42"]
+[ext_resource type="AudioStream" uid="uid://dw6mstdw4yacg" path="res://assets/audio/amb/steps/step-002.wav" id="11_y6dfb"]
 [ext_resource type="PackedScene" uid="uid://bxoaikhox2c48" path="res://scenes/characters/weapon_component.tscn" id="12_d5cwm"]
+[ext_resource type="AudioStream" uid="uid://vxac1vge0lfn" path="res://assets/audio/amb/steps/step-003.wav" id="12_rdi1k"]
+[ext_resource type="AudioStream" uid="uid://vff7xipvcsik" path="res://assets/audio/amb/steps/step-004.wav" id="13_4likc"]
 [ext_resource type="PackedScene" uid="uid://ctv7vmtkqc4xw" path="res://scenes/characters/hit_box_component.tscn" id="13_pj7eo"]
+[ext_resource type="Script" path="res://scripts/system/spawn_snd.gd" id="14_y0vvy"]
 [ext_resource type="Script" path="res://scripts/character/player/DetectableComponent.gd" id="15_ckcpl"]
+[ext_resource type="PackedScene" uid="uid://b5gn7i4lyaqri" path="res://scenes/system/zonescan.tscn" id="17_clfb1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7noai"]
 radius = 0.645
@@ -32,6 +39,17 @@ size = Vector3(0.715, 1.125, 0.62)
 font = ExtResource("2_2i5ma")
 font_size = 5
 shadow_size = 0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_46go2"]
+streams_count = 4
+stream_0/stream = ExtResource("10_kkh80")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("11_y6dfb")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("12_rdi1k")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("13_4likc")
+stream_3/weight = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jvgpw"]
 radius = 1.1
@@ -108,7 +126,7 @@ gravity_amount = 2.0
 
 [node name="MotionComponent" type="Node3D" parent="."]
 script = ExtResource("3_b4bgd")
-speed = 18.0
+speed = 14.0
 
 [node name="RotatorComponent" type="Node3D" parent="."]
 script = ExtResource("5_bgpgs")
@@ -116,6 +134,16 @@ script = ExtResource("5_bgpgs")
 [node name="JumpComponent" type="Node3D" parent="."]
 script = ExtResource("7_kmhjy")
 jump_velocity = 30.0
+
+[node name="FootstepComponent" parent="." instance=ExtResource("9_nxrw0")]
+
+[node name="step" type="AudioStreamPlayer3D" parent="FootstepComponent"]
+stream = SubResource("AudioStreamRandomizer_46go2")
+volume_db = -10.565
+max_distance = 54.45
+bus = &"Room"
+script = ExtResource("14_y0vvy")
+calc_occlusion = false
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("8_hy55j")]
 hitbox = NodePath("../HitBoxComponent")
@@ -152,3 +180,6 @@ script = ExtResource("15_ckcpl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectableComponent"]
 shape = SubResource("SphereShape3D_7m6k6")
+
+[node name="zonescan" parent="." groups=["player_zs"] instance=ExtResource("17_clfb1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0973, 0)

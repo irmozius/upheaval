@@ -1,10 +1,14 @@
-[gd_scene load_steps=47 format=3 uid="uid://bsjm7kikbd1tl"]
+[gd_scene load_steps=61 format=3 uid="uid://bsjm7kikbd1tl"]
 
 [ext_resource type="Script" path="res://scripts/weapons/base_weapon.gd" id="1_f3reb"]
 [ext_resource type="PackedScene" uid="uid://6yeci82hrjrm" path="res://scenes/weapons/bone_bullet.tscn" id="2_ocgt8"]
 [ext_resource type="Texture2D" uid="uid://g2hnujgcjofu" path="res://addons/kenney_particle_pack/fire_01.png" id="3_8lwih"]
-[ext_resource type="AudioStream" uid="uid://cqqsirwtr0awm" path="res://assets/audio/sfx/weapons/Mega Body Punch 01.wav" id="4_eqnm2"]
+[ext_resource type="AudioStream" uid="uid://b77jro7ynbx2h" path="res://assets/audio/sfx/weapons/rifle-001.wav" id="4_1dkyv"]
 [ext_resource type="Script" path="res://scripts/system/spawn_snd.gd" id="5_n2juy"]
+[ext_resource type="AudioStream" uid="uid://qkp2fnlfb1gm" path="res://assets/audio/sfx/weapons/rifle-002.wav" id="5_ya072"]
+[ext_resource type="AudioStream" uid="uid://bh7mwhr1js2l0" path="res://assets/audio/sfx/weapons/rifle-003.wav" id="6_1grt0"]
+[ext_resource type="Script" path="res://scripts/weapons/bone_part.gd" id="8_4j4it"]
+[ext_resource type="AudioStream" uid="uid://cg8utt2b0lmek" path="res://assets/audio/sfx/weapons/reload.wav" id="9_jkoog"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wlv2d"]
 resource_name = "bone"
@@ -608,21 +612,156 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xyhel")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4grpd"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfp2n"]
+resource_name = "bone"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_to65p"]
+_surfaces = [{
+"aabb": AABB(-0.939013, -6.17142, -4.17928, 1.61688, 11.1454, 6.11534),
+"format": 4097,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0, 2, 0, 7, 0, 3, 0, 2, 0, 6, 0, 7, 0, 6, 0, 5, 0, 7, 0, 6, 0, 4, 0, 5, 0, 4, 0, 1, 0, 5, 0, 4, 0, 0, 0, 1, 0, 2, 0, 4, 0, 6, 0, 2, 0, 0, 0, 4, 0, 7, 0, 1, 0, 3, 0, 7, 0, 5, 0, 1, 0),
+"name": "bone",
+"primitive": 3,
+"vertex_count": 8,
+"vertex_data": PackedByteArray(8, 104, 110, 191, 66, 124, 197, 192, 210, 167, 43, 192, 48, 99, 112, 191, 154, 15, 153, 64, 211, 208, 247, 63, 8, 104, 110, 191, 220, 156, 178, 192, 178, 188, 133, 192, 48, 99, 112, 191, 21, 43, 159, 64, 223, 204, 185, 63, 160, 136, 45, 63, 66, 124, 197, 192, 210, 167, 43, 192, 1, 41, 214, 190, 154, 15, 153, 64, 211, 208, 247, 63, 160, 136, 45, 63, 220, 156, 178, 192, 178, 188, 133, 192, 1, 41, 214, 190, 21, 43, 159, 64, 223, 204, 185, 63)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8jjc0"]
+resource_name = "bone_pistol-6daa8085dd69d600386ed3106d3b0c14_Cube_004"
+_surfaces = [{
+"aabb": AABB(-0.939013, -6.17142, -4.17928, 1.61688, 11.1454, 6.11534),
+"attribute_data": PackedByteArray(0, 0, 192, 62, 0, 0, 128, 63, 0, 0, 0, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 0, 0, 0, 0, 32, 63, 0, 0, 128, 63, 0, 0, 32, 63, 0, 0, 0, 0, 0, 0, 96, 63, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 64, 63, 0, 0, 0, 62, 0, 0, 0, 63, 0, 0, 192, 62, 0, 0, 64, 63, 0, 0, 32, 63, 0, 0, 64, 63, 0, 0, 32, 63, 0, 0, 64, 63, 0, 0, 96, 63, 0, 0, 0, 63, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 0, 63, 0, 0, 192, 62, 0, 0, 0, 63, 0, 0, 192, 62, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 0, 63),
+"format": 4119,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 9, 0, 3, 0, 0, 0, 6, 0, 9, 0, 8, 0, 21, 0, 10, 0, 8, 0, 19, 0, 21, 0, 20, 0, 17, 0, 23, 0, 20, 0, 14, 0, 17, 0, 13, 0, 4, 0, 15, 0, 13, 0, 2, 0, 4, 0, 7, 0, 12, 0, 18, 0, 7, 0, 1, 0, 12, 0, 22, 0, 5, 0, 11, 0, 22, 0, 16, 0, 5, 0),
+"material": SubResource("StandardMaterial3D_nfp2n"),
+"name": "bone",
+"primitive": 3,
+"vertex_count": 24,
+"vertex_data": PackedByteArray(8, 104, 110, 191, 66, 124, 197, 192, 210, 167, 43, 192, 19, 0, 229, 127, 239, 127, 204, 233, 8, 104, 110, 191, 66, 124, 197, 192, 210, 167, 43, 192, 43, 164, 0, 0, 255, 255, 255, 191, 8, 104, 110, 191, 66, 124, 197, 192, 210, 167, 43, 192, 255, 127, 9, 90, 204, 119, 34, 234, 48, 99, 112, 191, 154, 15, 153, 64, 211, 208, 247, 63, 19, 0, 229, 127, 239, 127, 254, 236, 48, 99, 112, 191, 154, 15, 153, 64, 211, 208, 247, 63, 255, 127, 9, 90, 239, 127, 254, 236, 48, 99, 112, 191, 154, 15, 153, 64, 211, 208, 247, 63, 255, 127, 211, 219, 0, 0, 255, 191, 8, 104, 110, 191, 220, 156, 178, 192, 178, 188, 133, 192, 19, 0, 229, 127, 239, 127, 182, 233, 8, 104, 110, 191, 220, 156, 178, 192, 178, 188, 133, 192, 43, 164, 0, 0, 255, 255, 255, 191, 8, 104, 110, 191, 220, 156, 178, 192, 178, 188, 133, 192, 119, 211, 255, 255, 23, 120, 39, 231, 48, 99, 112, 191, 21, 43, 159, 64, 223, 204, 185, 63, 19, 0, 229, 127, 239, 127, 185, 236, 48, 99, 112, 191, 21, 43, 159, 64, 223, 204, 185, 63, 119, 211, 255, 255, 239, 127, 182, 233, 48, 99, 112, 191, 21, 43, 159, 64, 223, 204, 185, 63, 255, 127, 211, 219, 0, 0, 255, 191, 160, 136, 45, 63, 66, 124, 197, 192, 210, 167, 43, 192, 43, 164, 0, 0, 255, 255, 255, 191, 160, 136, 45, 63, 66, 124, 197, 192, 210, 167, 43, 192, 255, 127, 9, 90, 148, 119, 14, 234, 160, 136, 45, 63, 66, 124, 197, 192, 210, 167, 43, 192, 82, 242, 205, 137, 223, 119, 42, 231, 1, 41, 214, 190, 154, 15, 153, 64, 211, 208, 247, 63, 255, 127, 9, 90, 55, 127, 189, 236, 1, 41, 214, 190, 154, 15, 153, 64, 211, 208, 247, 63, 255, 127, 211, 219, 0, 0, 255, 191, 1, 41, 214, 190, 154, 15, 153, 64, 211, 208, 247, 63, 82, 242, 205, 137, 148, 119, 14, 234, 160, 136, 45, 63, 220, 156, 178, 192, 178, 188, 133, 192, 43, 164, 0, 0, 255, 255, 255, 191, 160, 136, 45, 63, 220, 156, 178, 192, 178, 188, 133, 192, 119, 211, 255, 255, 225, 119, 21, 231, 160, 136, 45, 63, 220, 156, 178, 192, 178, 188, 133, 192, 82, 242, 205, 137, 225, 119, 21, 231, 1, 41, 214, 190, 21, 43, 159, 64, 223, 204, 185, 63, 119, 211, 255, 255, 63, 127, 125, 233, 1, 41, 214, 190, 21, 43, 159, 64, 223, 204, 185, 63, 255, 127, 211, 219, 0, 0, 255, 191, 1, 41, 214, 190, 21, 43, 159, 64, 223, 204, 185, 63, 82, 242, 205, 137, 154, 119, 208, 233)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_to65p")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g1wyp"]
+streams_count = 3
+random_pitch = 1.15
+stream_0/stream = ExtResource("4_1dkyv")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_ya072")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_1grt0")
+stream_2/weight = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_so8lv"]
+direction = Vector3(-0.1, 1, 0)
+spread = 19.9
+initial_velocity_min = 1.2
+initial_velocity_max = 2.05
+angle_min = -195.0
+angle_max = 198.0
+scale_min = 0.55
+scale_max = 0.95
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5itgm"]
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sgesc"]
+material = SubResource("StandardMaterial3D_5itgm")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.09
+radial_segments = 4
+rings = 1
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qfowr"]
 streams_count = 1
 random_pitch = 1.15
-stream_0/stream = ExtResource("4_eqnm2")
+stream_0/stream = ExtResource("9_jkoog")
 stream_0/weight = 1.0
 
-[node name="sinew_rifle" type="Node3D"]
+[sub_resource type="Animation" id="Animation_pv60b"]
+resource_name = "reload"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mesh/mag:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.483605, 0.393555, 0.38828), Vector3(2.39302, -1.12289, 0.466673), Vector3(2.39302, -1.12289, 0.466673), Vector3(0.483605, 0.393555, 0.38828)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mesh/mag:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.00927348, -3.12041, -1.78893), Vector3(-0.0445115, -3.13816, -0.855709), Vector3(-0.0445115, -3.13816, -0.855709), Vector3(0.00927348, -3.12041, -1.78893)]
+}
+
+[sub_resource type="Animation" id="Animation_nvfsy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mesh/mag:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.483605, 0.393555, 0.38828)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mesh/mag:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.00927348, -3.12041, -1.78893)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mmks8"]
+_data = {
+"RESET": SubResource("Animation_nvfsy"),
+"reload": SubResource("Animation_pv60b")
+}
+
+[node name="sinew_rifle" type="Node3D" node_paths=PackedStringArray("mag_mesh", "bone_part")]
 script = ExtResource("1_f3reb")
 wep_name = "rifle"
 damage = 20.0
 bullet_res = ExtResource("2_ocgt8")
 rate = 0.1
-reload_time = 1.46
+reload_time = 1.2
 kickback = 0.1
 clip_size = 30
+mag_mesh = NodePath("mesh/mag")
+bone_part = NodePath("bone_part")
 
 [node name="spawn_pos" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0196311, 0.290557, -1.84718)
@@ -643,7 +782,7 @@ mesh = SubResource("ArrayMesh_3p0vd")
 skeleton = NodePath("")
 
 [node name="bone2" type="MeshInstance3D" parent="mesh"]
-transform = Transform3D(-0.0111138, -0.0271137, 0.162158, 0.015809, 0.251037, 0.0184937, -0.161919, 0.026371, -0.00932453, 0.369154, 0, 0.343168)
+transform = Transform3D(-0.0111138, -0.0271137, 0.162158, 0.015809, 0.251037, 0.0184937, -0.161919, 0.0263711, -0.00932457, 0.369154, 0, 0.343168)
 mesh = SubResource("ArrayMesh_6mg82")
 skeleton = NodePath("")
 
@@ -727,11 +866,42 @@ transform = Transform3D(0.00178981, -0.0407039, -0.0880854, -0.00386579, 0.08791
 mesh = SubResource("ArrayMesh_qf30o")
 skeleton = NodePath("")
 
+[node name="mag" type="Marker3D" parent="mesh"]
+transform = Transform3D(0.216553, -0.97604, -0.0211821, -0.97626, -0.2164, -0.00927334, 0.00446734, 0.0226874, -0.999732, 0.483605, 0.393555, 0.38828)
+
+[node name="bone4" type="MeshInstance3D" parent="mesh/mag"]
+transform = Transform3D(0.0744941, 0.00167382, -0.00224781, 0.000389015, -0.0852588, -0.0654168, -0.00177977, 0.0514244, -0.108384, 0.0195396, -0.724929, -0.0720989)
+mesh = SubResource("ArrayMesh_8jjc0")
+skeleton = NodePath("")
+
 [node name="shot_sound" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamRandomizer_4grpd")
+stream = SubResource("AudioStreamRandomizer_g1wyp")
 attenuation_model = 1
+volume_db = 0.23
 unit_size = 20.0
-pitch_scale = 1.55
 max_distance = 100.0
 bus = &"Room"
 script = ExtResource("5_n2juy")
+calc_occlusion = false
+
+[node name="bone_part" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.268605, 0.387354, -0.496931)
+emitting = false
+amount = 1
+lifetime = 1.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_so8lv")
+draw_pass_1 = SubResource("CylinderMesh_sgesc")
+script = ExtResource("8_4j4it")
+
+[node name="reload_sound" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_qfowr")
+unit_size = 20.0
+pitch_scale = 1.8
+max_distance = 100.0
+bus = &"Room"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mmks8")
+}

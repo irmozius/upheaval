@@ -5,6 +5,8 @@ class_name Weapon extends Node3D
 @onready var spawn_pos = $spawn_pos
 @onready var flare = $spawn_pos/flare
 @onready var shot_sound = $shot_sound
+@onready var reload_sound = $reload_sound
+@onready var animation_player = $AnimationPlayer
 
 @export var wep_name := "pistol"
 @export var damage := 5.0
@@ -13,6 +15,8 @@ class_name Weapon extends Node3D
 @export var reload_time := 1.0
 @export var kickback := 0.2
 @export var clip_size := 25
+@export var mag_mesh : Node
+@export var bone_part : Node
 @export_enum("light", "medium", "heavy") var rounds := "light"
 
 var clip := 25
@@ -45,6 +49,7 @@ func shoot():
 	recoil()
 	minus_ammo()
 	muzzle_flare()
+	spawn_bone_part()
 	var bullet = bullet_res.instantiate()
 	bullet.init(spawn_pos.global_position, get_dir(), team, damage, weapons.entity)
 	proot.add_child(bullet)
@@ -77,6 +82,8 @@ func update_stockpile(amnt):
 
 func reload():
 	if clip == clip_size: return
+	animation_player.play("reload")
+	reload_sound.play()
 	can_fire = false
 	lerp_back = false
 	reloading = true
@@ -94,9 +101,11 @@ func reload():
 	await get_tree().create_timer(reload_time - 0.3).timeout
 	reload_mid.emit()
 	lerp_back = true
+	update_ammo_display()
+	scale_mag()
+	await get_tree().create_timer(0.1).timeout
 	can_fire = true
 	reloading = false
-	update_ammo_display()
 
 func reload_rotate():
 	var t = create_tween()
@@ -104,6 +113,12 @@ func reload_rotate():
 	await reload_mid
 	var tt = create_tween()
 	tt.tween_property(self, 'rotation_degrees:z', 0, 0.2)
+
+func spawn_bone_part():
+	var p = bone_part.duplicate()
+	var world = get_tree().get_first_node_in_group("world")
+	world.add_child(p)
+	p.init(bone_part.global_position)
 	
 func minus_ammo():
 	var ammo = get_stockpile()
@@ -115,7 +130,8 @@ func minus_ammo():
 		can_fire = false
 	update_stockpile(ammo)
 	update_ammo_display()
-
+	scale_mag()
+	
 func _process(_delta):
 	lerp_pos()
 	
@@ -124,11 +140,15 @@ func lerp_pos():
 	if disabled: return
 	position = lerp(position, Vector3.ZERO, 0.5)
 	rotation_degrees.x = lerp(rotation_degrees.x,0.0,0.5)
-	
+
+func scale_mag():
+	var new_size : float = float(clip) / float(clip_size * 0.9)
+	mag_mesh.scale.y = new_size
+
 func update_ammo_display():
 	if !weapons.team == "player": return
 	var lab : Label = weapons.ammo_lab
-	var ammo = get_stockpile()
+#	var ammo = get_stockpile()
 	lab.text = str("Clip: %s" % clip)
 
 func muzzle_flare():

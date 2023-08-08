@@ -1,18 +1,16 @@
 extends Node
 
+@export var weapon : Node
+
 @onready var entity = $"../.."
 @onready var states = $".."
 @onready var tracker : AI_Tracker = $"../../TargetTrackerComponent"
 @onready var decider = $"../../AttackDeciderComponent"
 @onready var motion = $"../../MotionComponent"
 @onready var rotator = $"../../RotatorComponent"
-@onready var weapon = $"../../weapon/WeaponComponent"
 @onready var anim = $"../../AnimationComponent"
 @onready var sounds_component = $"../../SoundsComponent"
 @onready var health_component = $"../../HealthComponent"
-
-func _ready():
-	weapon = get_node("../../weapon/WeaponComponent")
 
 func enter():
 	sounds_component.start_barks()

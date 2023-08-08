@@ -2,11 +2,15 @@ extends Node
 
 @onready var entity = $".."
 
+
 @export var hitbox : HitBox
 @export var max_hp := 100.0
+@export var sounds : Node
+@export var tracker : Node
+
 @onready var states = $"../states"
-@onready var sounds = $"../SoundsComponent"
-@onready var tracker = $"../TargetTrackerComponent"
+#@onready var sounds = $"../SoundsComponent"
+#@onready var tracker = $"../TargetTrackerComponent"
 
 var hp := 100.0
 
@@ -34,5 +38,6 @@ func die():
 	died.emit()
 	entity.remove_pieces()
 	if entity is PlayerCharacter:
-		get_tree().get_first_node_in_group("dead_screen").show()
+		MusicManager.danger = 0.0
+		get_tree().get_first_node_in_group("dead_screen").reveal()
 		entity.queue_free()

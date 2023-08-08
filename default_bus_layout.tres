@@ -1,21 +1,32 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://7ntcrt2p0o74"]
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://7ntcrt2p0o74"]
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_2qe31"]
 resource_name = "Compressor"
-threshold = -0.5
-ratio = 8.0
+threshold = -5.3
+ratio = 5.0
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_brg6g"]
 resource_name = "Reverb"
-room_size = 0.2
-damping = 0.1
-wet = 0.07
+room_size = 0.35
+damping = 0.05
+wet = 0.17
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_2s5rp"]
 resource_name = "Compressor"
 threshold = -4.0
 ratio = 12.0
 gain = 4.0
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_j4c2g"]
+resource_name = "LowPassFilter"
+cutoff_hz = 900.0
+db = 3
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_giqym"]
+resource_name = "Compressor"
+threshold = -2.9
+ratio = 22.8
+gain = 2.9
 
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectCompressor_2qe31")
@@ -36,3 +47,13 @@ bus/2/volume_db = 0.0
 bus/2/send = &"Master"
 bus/2/effect/0/effect = SubResource("AudioEffectCompressor_2s5rp")
 bus/2/effect/0/enabled = true
+bus/3/name = &"OutsideRoom"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Room"
+bus/3/effect/0/effect = SubResource("AudioEffectLowPassFilter_j4c2g")
+bus/3/effect/0/enabled = true
+bus/3/effect/1/effect = SubResource("AudioEffectCompressor_giqym")
+bus/3/effect/1/enabled = true
