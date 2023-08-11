@@ -25,7 +25,7 @@ func _process(_delta):
 	var pos : Vector3 = entity.global_position
 	if target:
 		target_pos = target.global_position
-		aim_pos = lerp(aim_pos, target_pos, 0.6)
+		aim_pos = lerp(aim_pos, target_pos, 0.5)
 		target_dir = pos.direction_to(target_pos)
 		target_dis = pos.distance_to(target_pos)
 

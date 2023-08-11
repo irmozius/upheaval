@@ -7,6 +7,7 @@ class_name Weapon extends Node3D
 @onready var shot_sound = $shot_sound
 @onready var reload_sound = $reload_sound
 @onready var animation_player = $AnimationPlayer
+@onready var reload_end_sound = $reload_end
 
 @export var wep_name := "pistol"
 @export var damage := 5.0
@@ -30,6 +31,8 @@ var reloading := false
 signal reload_mid
 
 func _ready():
+	if get_stockpile() > clip_size:
+		clip = clip_size
 	update_ammo_display()
 	timer = Timer.new()
 	add_child(timer)
@@ -49,7 +52,8 @@ func shoot():
 	recoil()
 	minus_ammo()
 	muzzle_flare()
-	spawn_bone_part()
+	if bone_part:
+		spawn_bone_part()
 	var bullet = bullet_res.instantiate()
 	bullet.init(spawn_pos.global_position, get_dir(), team, damage, weapons.entity)
 	proot.add_child(bullet)
@@ -99,10 +103,12 @@ func reload():
 	t.tween_property(self, 'position:y', 0.2, 0.3)
 	await t.finished
 	await get_tree().create_timer(reload_time - 0.3).timeout
+	reload_end_sound.play()
 	reload_mid.emit()
 	lerp_back = true
 	update_ammo_display()
-	scale_mag()
+	if mag_mesh:
+		scale_mag()
 	await get_tree().create_timer(0.1).timeout
 	can_fire = true
 	reloading = false
@@ -130,7 +136,8 @@ func minus_ammo():
 		can_fire = false
 	update_stockpile(ammo)
 	update_ammo_display()
-	scale_mag()
+	if mag_mesh:
+		scale_mag()
 	
 func _process(_delta):
 	lerp_pos()
@@ -160,13 +167,17 @@ func muzzle_flare():
 	
 func get_dir():
 	var cast : RayCast3D = weapons.cast
-	var pos := cast.global_position
+	var pos : Vector3 = spawn_pos.global_position
 	var spot : Vector3
 	if cast.is_colliding():
 		spot = cast.get_collision_point()
 	else:
 		var fw : Vector3 = -cast.global_transform.basis.z 
 		spot = pos + (fw * 300)
+	if team == "enemy":
+		spot += Vector3(randf_range(-2,2),
+						randf_range(-2,2),
+						randf_range(-2,2))
 	var dir : Vector3 = pos.direction_to(spot)
 	return dir
 

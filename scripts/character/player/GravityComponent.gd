@@ -5,12 +5,14 @@ class_name GravityComponent extends Node3D
 @onready var jump_component = $"../JumpComponent"
 #@onready var player_input = $"../PlayerInput"
 
+@export var apply_gravity := true
 @export var gravity_amount := 0.1
 
 var gravity : float
 var falling := false
 
 func get_grounded():
+	if !apply_gravity: return true
 	return entity.is_on_floor()
 
 func _physics_process(_delta):

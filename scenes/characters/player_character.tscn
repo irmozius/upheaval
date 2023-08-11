@@ -56,13 +56,14 @@ radius = 1.1
 height = 3.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7m6k6"]
-radius = 1.32499
+radius = 1.66808
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 script = ExtResource("1_gryln")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_7noai")
 
 [node name="meshes" type="MeshInstance3D" parent="."]
@@ -115,6 +116,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25664, -0.205669)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336417, -0.64051, -0.372336)
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+visible = false
 target_position = Vector3(0, 0, -300)
 
 [node name="PlayerInput" type="Node" parent="."]
@@ -179,6 +181,7 @@ collision_mask = 0
 script = ExtResource("15_ckcpl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectableComponent"]
+visible = false
 shape = SubResource("SphereShape3D_7m6k6")
 
 [node name="zonescan" parent="." groups=["player_zs"] instance=ExtResource("17_clfb1")]

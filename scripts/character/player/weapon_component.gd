@@ -1,17 +1,19 @@
 class_name WeaponsComponent extends Node3D
 
 @export var team := "player"
+@export var light_ammo := 300
+@export var med_ammo := 200
+@export var heavy_ammo := 100
+@export var arsenal : Array[PackedScene] = [preload("res://scenes/weapons/bone_pistol.tscn"),
+						preload("res://scenes/weapons/sinew_rifle.tscn"),
+						preload("res://scenes/weapons/meat_launcher.tscn")]
 
 @onready var entity = $"../.."
 @onready var cast = $"../RayCast3D"
 @onready var ammo_lab = $"../../UI/Label"
 
 var weapon
-var light_ammo := 300
-var med_ammo := 200
-var heavy_ammo := 100
 
-var arsenal : Array = [preload("res://scenes/weapons/bone_pistol.tscn"), preload("res://scenes/weapons/sinew_rifle.tscn")]
 var num := 0
 
 func _ready():

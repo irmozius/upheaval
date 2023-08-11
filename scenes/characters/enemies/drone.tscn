@@ -1,0 +1,542 @@
+[gd_scene load_steps=43 format=3 uid="uid://dlkilf53m358b"]
+
+[ext_resource type="Script" path="res://scripts/character/enemy/enemy_character.gd" id="1_uknin"]
+[ext_resource type="PackedScene" uid="uid://bxoaikhox2c48" path="res://scenes/characters/weapon_component.tscn" id="2_688g2"]
+[ext_resource type="Script" path="res://scripts/character/enemy/AnimationComponent.gd" id="7_2vfgq"]
+[ext_resource type="AudioStream" uid="uid://bnn5eg4426kxh" path="res://assets/audio/character/drone/beeps.wav" id="7_bn4bn"]
+[ext_resource type="Script" path="res://scripts/character/player/GravityComponent.gd" id="8_w3old"]
+[ext_resource type="PackedScene" uid="uid://b3r7mpl8be58s" path="res://scenes/characters/sounds_component.tscn" id="9_dftqn"]
+[ext_resource type="Script" path="res://scripts/system/spawn_snd.gd" id="13_w4buf"]
+[ext_resource type="Script" path="res://scripts/character/JumpComponent.gd" id="18_g1ruk"]
+[ext_resource type="Script" path="res://scripts/character/player/MotionComponent.gd" id="19_niguh"]
+[ext_resource type="Script" path="res://scripts/character/player/RotatorComponent.gd" id="20_vf5do"]
+[ext_resource type="PackedScene" uid="uid://by1x4o7t22356" path="res://scenes/characters/steering.tscn" id="21_oelga"]
+[ext_resource type="Script" path="res://scripts/system/wing_spin.gd" id="22_6uviw"]
+[ext_resource type="PackedScene" uid="uid://dsuyrx13ts6po" path="res://scenes/characters/ai_detection_component.tscn" id="22_plamf"]
+[ext_resource type="Script" path="res://scripts/character/enemy/AttackDeciderComponent.gd" id="23_ddjnh"]
+[ext_resource type="PackedScene" uid="uid://bp8vadfu461k0" path="res://scenes/weapons/drone_gun.tscn" id="24_1qc8y"]
+[ext_resource type="Script" path="res://scripts/resources/attack_entry.gd" id="24_y0jkx"]
+[ext_resource type="PackedScene" uid="uid://djqi5uhkfo4k7" path="res://scenes/characters/target_tracker_component.tscn" id="25_j5ik8"]
+[ext_resource type="AudioStream" uid="uid://dajo7tdef4sqb" path="res://assets/audio/character/drone/hum.wav" id="25_v30rb"]
+[ext_resource type="PackedScene" uid="uid://5ps3vjr4qnob" path="res://scenes/characters/health_component.tscn" id="26_ki745"]
+[ext_resource type="AudioStream" uid="uid://bubn0rbx8niyv" path="res://assets/audio/character/drone/hitsnd-001.wav" id="26_lv8gl"]
+[ext_resource type="PackedScene" uid="uid://ctv7vmtkqc4xw" path="res://scenes/characters/hit_box_component.tscn" id="27_0u1cx"]
+[ext_resource type="AudioStream" uid="uid://mex585j2tad7" path="res://assets/audio/character/drone/hitsnd-002.wav" id="27_xktlr"]
+[ext_resource type="Script" path="res://scripts/character/player/states.gd" id="28_nbnnh"]
+[ext_resource type="Script" path="res://scripts/character/enemy/states/idle.gd" id="29_58r5e"]
+[ext_resource type="Script" path="res://scripts/character/enemy/states/chase.gd" id="30_5lvsc"]
+[ext_resource type="Script" path="res://scripts/character/enemy/states/falling.gd" id="31_2gfni"]
+[ext_resource type="Script" path="res://scripts/character/enemy/states/death.gd" id="32_5ngk8"]
+[ext_resource type="Script" path="res://scripts/character/enemy/states/attack_anim.gd" id="33_ge0vb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7pcr3"]
+radius = 0.608158
+height = 4.07582
+
+[sub_resource type="Animation" id="Animation_cowpv"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitBoxComponent:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.031, 0), Vector3(0, -0.029, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBoxComponent:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.0121999, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hum:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("body:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hum:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-8.188]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitBoxComponent/model/WeaponComponent:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(7.45058e-09, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jber1"]
+resource_name = "walk"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitBoxComponent:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0694435, 0, 0), Vector3(-0.117807, 0, 0), Vector3(-0.0694435, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBoxComponent:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.0130752, 0.287648), Vector3(0.0924671, -0.137697, 0.362084), Vector3(0, -0.262318, 0.43652), Vector3(-0.113686, -0.137697, 0.362084), Vector3(0, -0.0130752, 0.287648)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hum:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.25]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hum:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-5.143]
+}
+
+[sub_resource type="Animation" id="Animation_egpjc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitBoxComponent/model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBoxComponent/model:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hum:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("body:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("body:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.65421, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("hum:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-12.163]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitBoxComponent/model/WeaponComponent:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(7.45058e-09, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_84ay1"]
+resource_name = "death"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hum:pitch_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.92, 0.56]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hum:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-15.573, -37.534]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("body:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.65421, 0), Vector3(0, 3.55784, 0.290866), Vector3(0.0638649, 2.48113, -0.365735), Vector3(0, 0.134979, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hum:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SoundsComponent")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.55),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["death"],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s8m8b"]
+_data = {
+"RESET": SubResource("Animation_egpjc"),
+"death": SubResource("Animation_84ay1"),
+"idle": SubResource("Animation_cowpv"),
+"walk": SubResource("Animation_jber1")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bfbv3"]
+albedo_color = Color(0.635294, 0.635294, 0.635294, 1)
+metallic = 0.74
+metallic_specular = 0.0
+roughness = 0.25
+
+[sub_resource type="SphereMesh" id="SphereMesh_6a3ex"]
+material = SubResource("StandardMaterial3D_bfbv3")
+radius = 0.915
+height = 0.81
+radial_segments = 8
+rings = 3
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lf32h"]
+streams_count = 1
+stream_0/stream = ExtResource("7_bn4bn")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2nhg4"]
+streams_count = 2
+stream_0/stream = ExtResource("26_lv8gl")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("27_xktlr")
+stream_1/weight = 1.0
+
+[sub_resource type="Resource" id="Resource_rinst"]
+script = ExtResource("24_y0jkx")
+attack_range = 30.0
+type = "Weapon"
+anim_name = ""
+weapon_attack_type = "Light"
+anim_cooldown = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mf6kc"]
+radius = 0.501011
+
+[sub_resource type="BoxMesh" id="BoxMesh_3entq"]
+size = Vector3(4.29, 0.015, 0.28)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_eeubk"]
+streams_count = 2
+random_pitch = 1.15
+stream_0/stream = ExtResource("26_lv8gl")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("27_xktlr")
+stream_1/weight = 1.0
+
+[node name="drone" type="CharacterBody3D"]
+script = ExtResource("1_uknin")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 2.06899, 0.00286092)
+shape = SubResource("CapsuleShape3D_7pcr3")
+
+[node name="AnimationComponent" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+playback_default_blend_time = 0.1
+libraries = {
+"": SubResource("AnimationLibrary_s8m8b")
+}
+script = ExtResource("7_2vfgq")
+
+[node name="body" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.355, 0, 0, 0, 0.355, 0, 0, 0, 0.355, 0, 3.65421, 0)
+visible = false
+mesh = SubResource("SphereMesh_6a3ex")
+
+[node name="GravityComponent" type="Node3D" parent="."]
+script = ExtResource("8_w3old")
+gravity_amount = 2.0
+
+[node name="hum" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5702, 0)
+stream = ExtResource("25_v30rb")
+volume_db = -12.163
+autoplay = true
+max_distance = 70.0
+bus = &"Room"
+script = ExtResource("13_w4buf")
+calc_occlusion = false
+
+[node name="SoundsComponent" parent="." instance=ExtResource("9_dftqn")]
+
+[node name="bark" type="AudioStreamPlayer3D" parent="SoundsComponent"]
+stream = SubResource("AudioStreamRandomizer_lf32h")
+volume_db = -2.039
+unit_size = 12.52
+pitch_scale = 0.77
+max_distance = 80.0
+bus = &"Room"
+script = ExtResource("13_w4buf")
+
+[node name="death" type="AudioStreamPlayer3D" parent="SoundsComponent"]
+stream = SubResource("AudioStreamRandomizer_2nhg4")
+volume_db = -8.258
+pitch_scale = 0.65
+max_distance = 100.0
+bus = &"Room"
+script = ExtResource("13_w4buf")
+
+[node name="btimer" type="Timer" parent="SoundsComponent"]
+one_shot = true
+
+[node name="JumpComponent" type="Node3D" parent="."]
+script = ExtResource("18_g1ruk")
+jump_velocity = 30.0
+
+[node name="MotionComponent" type="Node3D" parent="." node_paths=PackedStringArray("anim", "steering")]
+script = ExtResource("19_niguh")
+speed = 12.0
+anim = NodePath("../AnimationComponent")
+steering = NodePath("../SteeringComponent")
+
+[node name="RotatorComponent" type="Node3D" parent="."]
+script = ExtResource("20_vf5do")
+
+[node name="SteeringComponent" parent="." instance=ExtResource("21_oelga")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07163, 0)
+
+[node name="AIDetectionComponent" parent="." instance=ExtResource("22_plamf")]
+
+[node name="AttackDeciderComponent" type="Node3D" parent="." node_paths=PackedStringArray("weapon")]
+script = ExtResource("23_ddjnh")
+weapon = NodePath("../HitBoxComponent/model/WeaponComponent")
+attacks = Array[ExtResource("24_y0jkx")]([SubResource("Resource_rinst")])
+
+[node name="Timer" type="Timer" parent="AttackDeciderComponent"]
+wait_time = 0.398
+one_shot = true
+
+[node name="TargetTrackerComponent" parent="." instance=ExtResource("25_j5ik8")]
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hitbox", "sounds", "tracker") instance=ExtResource("26_ki745")]
+hitbox = NodePath("../HitBoxComponent")
+max_hp = 30.0
+sounds = NodePath("../SoundsComponent")
+tracker = NodePath("../TargetTrackerComponent")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("27_0u1cx")]
+transform = Transform3D(1, 0, 0, 0, 0.99759, 0.0693877, 0, -0.0693877, 0.99759, 0, -0.0130752, 0.287648)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+transform = Transform3D(1, 0, 0, 0, -4.47035e-08, 1, 0, -1, -4.47035e-08, 0, 3.40769, -2.08616e-07)
+shape = SubResource("SphereShape3D_mf6kc")
+
+[node name="model" type="Node3D" parent="HitBoxComponent"]
+transform = Transform3D(0.36, 0, 0, 0, 0.36, 0, 0, 0, 0.36, 0, 0, 0)
+
+[node name="body" type="MeshInstance3D" parent="HitBoxComponent/model"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 9.87415, 0)
+mesh = SubResource("SphereMesh_6a3ex")
+
+[node name="WeaponComponent" parent="HitBoxComponent/model" instance=ExtResource("2_688g2")]
+transform = Transform3D(1, 0, 0, 0, 1, -7.45058e-09, 0, 7.45058e-09, 1, 0, 9.49987, 0.00327581)
+team = "enemy"
+arsenal = Array[PackedScene]([ExtResource("24_1qc8y")])
+
+[node name="RayCast3D" type="RayCast3D" parent="HitBoxComponent/model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.81745, 0)
+target_position = Vector3(0, 0, -300)
+
+[node name="wing1" type="MeshInstance3D" parent="HitBoxComponent/model"]
+transform = Transform3D(1, 0, 0, 0, 1, 7.45058e-08, 0, -7.45058e-08, 1, 0, 9.91943, -2.98023e-07)
+mesh = SubResource("BoxMesh_3entq")
+script = ExtResource("22_6uviw")
+
+[node name="wing2" type="MeshInstance3D" parent="HitBoxComponent/model"]
+transform = Transform3D(1, 0, 0, 0, 1, 8.9407e-08, 0, -8.9407e-08, 1, 0, 9.81675, -2.98023e-07)
+mesh = SubResource("BoxMesh_3entq")
+script = ExtResource("22_6uviw")
+left = false
+
+[node name="hit_snd" type="AudioStreamPlayer3D" parent="HitBoxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.719604, -0.548931)
+stream = SubResource("AudioStreamRandomizer_eeubk")
+unit_size = 20.0
+pitch_scale = 2.68
+max_distance = 100.0
+bus = &"Room"
+script = ExtResource("13_w4buf")
+
+[node name="states" type="Node" parent="."]
+script = ExtResource("28_nbnnh")
+
+[node name="idle" type="Node" parent="states"]
+script = ExtResource("29_58r5e")
+
+[node name="chasing" type="Node" parent="states" node_paths=PackedStringArray("weapon")]
+script = ExtResource("30_5lvsc")
+weapon = NodePath("../../HitBoxComponent/model/WeaponComponent")
+close_range = 10.0
+
+[node name="falling" type="Node" parent="states"]
+script = ExtResource("31_2gfni")
+
+[node name="death" type="Node" parent="states"]
+script = ExtResource("32_5ngk8")
+
+[node name="attack_anim" type="Node" parent="states"]
+script = ExtResource("33_ge0vb")
+
+[connection signal="timeout" from="SoundsComponent/btimer" to="SoundsComponent" method="_on_btimer_timeout"]
+[connection signal="timeout" from="AttackDeciderComponent/Timer" to="AttackDeciderComponent" method="_on_timer_timeout"]
+[connection signal="hit" from="HitBoxComponent" to="TargetTrackerComponent" method="_on_hit_box_component_hit"]

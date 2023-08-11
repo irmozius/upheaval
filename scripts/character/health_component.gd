@@ -17,6 +17,7 @@ var hp := 100.0
 signal died
 
 func _ready():
+	hp = max_hp
 	if hitbox:
 		hitbox.hit.connect(take_damage)
 

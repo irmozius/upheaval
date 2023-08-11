@@ -192,7 +192,7 @@ angle_max = 223.7
 scale_min = 0.65
 scale_max = 1.25
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smf12"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_unoyf"]
 transparency = 1
 albedo_color = Color(0.666667, 0.266667, 0.262745, 1)
 albedo_texture = ExtResource("5_3jnqm")
@@ -206,7 +206,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4wrwd"]
-material = SubResource("StandardMaterial3D_smf12")
+material = SubResource("StandardMaterial3D_unoyf")
 size = Vector2(0.185, 0.205)
 orientation = 2
 

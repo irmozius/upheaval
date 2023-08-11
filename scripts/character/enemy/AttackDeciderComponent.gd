@@ -21,13 +21,18 @@ func set_max():
 	max_range = maxv
 	
 func decide():
+	if attacks.size() == 1:
+		if !can_anim: return
+		if attacks[0].type == "Animation":
+			can_anim = false
+		return attacks[0]
 	var list := []
 	var tdis : float = tracker.target_dis
 	for attack in attacks:
 		var value := 10.0
 		var range_diff : float = abs(tdis - attack.attack_range)
 		range_diff = clamp(range_diff, 1.0, 100.0)
-		value -= (range_diff/5)
+		value -= clamp((range_diff/5), 1.0,100.0)
 		if attack.attack_range < tdis:
 			value = 0.0
 		if attack.type == "Weapon":

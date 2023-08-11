@@ -15,6 +15,7 @@ height = 0.895
 
 [node name="pistol_bullet" type="Node3D"]
 script = ExtResource("1_vwkk2")
+speed = 2.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)

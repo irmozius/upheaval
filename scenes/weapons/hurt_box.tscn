@@ -1,11 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://dngqevxjlar1l"]
+[gd_scene load_steps=6 format=3 uid="uid://dngqevxjlar1l"]
 
 [ext_resource type="Script" path="res://scripts/weapons/hurt_box.gd" id="1_1b180"]
+[ext_resource type="Texture2D" uid="uid://ci6exa6mmxyog" path="res://addons/kenney_particle_pack/smoke_09.png" id="2_0kr1y"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wo6i8"]
+direction = Vector3(0, 0.51, 0)
+spread = 31.75
+gravity = Vector3(0, -15.005, 0)
+initial_velocity_min = 0.37
+initial_velocity_max = 4.17
+angle_min = -167.8
+angle_max = 223.7
+scale_min = 0.65
+scale_max = 1.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smf12"]
+transparency = 1
+albedo_color = Color(0.666667, 0.266667, 0.262745, 1)
+albedo_texture = ExtResource("2_0kr1y")
+emission_enabled = true
+emission = Color(0.564706, 0.145098, 0.184314, 1)
+emission_energy_multiplier = 0.85
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3t0ug"]
+material = SubResource("StandardMaterial3D_smf12")
+size = Vector2(0.185, 0.205)
+orientation = 2
 
 [node name="HurtBox" type="Area3D"]
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_1b180")
+
+[node name="bloodpart" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.999999, -8.9407e-08, 2.79397e-09, 2.23517e-07, 0.999999, -8.61473e-09, 2.32831e-09, 1.74623e-09, 1, -1.23675, -0.165864, 0.00766175)
+emitting = false
+amount = 30
+lifetime = 1.63
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_wo6i8")
+draw_pass_1 = SubResource("PlaneMesh_3t0ug")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="hit_wall"]

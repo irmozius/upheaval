@@ -9,6 +9,8 @@ class_name AI_Detection extends Node3D
 @onready var tracker = $"../TargetTrackerComponent"
 
 var active := true
+var detectable : PlayerDetectable
+var can_see : bool
 
 func _ready():
 	ray_cast_3d.add_exception(area_3d)
@@ -19,19 +21,20 @@ func _on_timer_timeout():
 	var cols : Array = area_3d.get_overlapping_areas()
 	for i in cols:
 		if i is PlayerDetectable:
-			var vis = await can_see_entity(i)
-			if vis:
-				tracker.set_target(i.entity)
-#				tracker.target = i.entity
-				active = false
-				timer.stop()
-				return
+			detectable = i
 	timer.start()
+
+func _process(delta):
+	can_see = can_see_entity()
+	if active and can_see:
+		tracker.set_target(detectable.entity)
+		active = false
+		timer.stop()
 				
-func can_see_entity(det : PlayerDetectable):
-	ray_cast_3d.look_at(det.global_position)
-	await get_tree().physics_frame
+func can_see_entity():
+	if !detectable: return false
+	ray_cast_3d.look_at(detectable.global_position, Vector3.UP)
 	if ray_cast_3d.is_colliding():
 		var col = ray_cast_3d.get_collider()
-		return col == det
+		if col == detectable: return true
 	return false

@@ -1,9 +1,14 @@
-[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://7ntcrt2p0o74"]
+[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://7ntcrt2p0o74"]
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_2qe31"]
 resource_name = "Compressor"
 threshold = -5.3
 ratio = 5.0
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_p7mim"]
+resource_name = "HighPassFilter"
+cutoff_hz = 30.0
+db = 1
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_brg6g"]
 resource_name = "Reverb"
@@ -37,11 +42,13 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
-bus/1/effect/0/effect = SubResource("AudioEffectReverb_brg6g")
+bus/1/effect/0/effect = SubResource("AudioEffectHighPassFilter_p7mim")
 bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource("AudioEffectReverb_brg6g")
+bus/1/effect/1/enabled = true
 bus/2/name = &"Music"
 bus/2/solo = false
-bus/2/mute = false
+bus/2/mute = true
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = &"Master"

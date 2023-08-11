@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlx2jx6cuwesg"]
+
+[ext_resource type="Script" path="res://scripts/weapons/base_bullet.gd" id="1_t8jsd"]
+[ext_resource type="PackedScene" uid="uid://dngqevxjlar1l" path="res://scenes/weapons/hurt_box.tscn" id="2_4bcqy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oqw2e"]
+resource_name = "flesh"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.906332, 0.501008, 0.680465, 1)
+roughness = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_dctyb"]
+material = SubResource("StandardMaterial3D_oqw2e")
+radius = 0.215
+radial_segments = 4
+rings = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_feh1v"]
+radius = 0.305
+height = 1.025
+
+[node name="meat_shell" type="Node3D"]
+script = ExtResource("1_t8jsd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, 3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.707107, 0, -1, -4.37114e-08, 0, 0, -0.446886)
+mesh = SubResource("SphereMesh_dctyb")
+
+[node name="HurtBox" parent="." instance=ExtResource("2_4bcqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.446886)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_feh1v")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="enemy_hit" from="HurtBox" to="." method="_on_hurt_box_enemy_hit"]
+[connection signal="wall_hit" from="HurtBox" to="." method="_on_hurt_box_wall_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

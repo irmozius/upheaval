@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://buyjd2upec3rf"]
+[gd_scene load_steps=58 format=3 uid="uid://buyjd2upec3rf"]
 
 [ext_resource type="Script" path="res://scripts/weapons/base_weapon.gd" id="1_srg4a"]
 [ext_resource type="PackedScene" uid="uid://6yeci82hrjrm" path="res://scenes/weapons/bone_bullet.tscn" id="2_n3nvc"]
@@ -6,7 +6,11 @@
 [ext_resource type="AudioStream" uid="uid://b5536r1t0at4j" path="res://assets/audio/sfx/weapons/pistol_shot.wav" id="4_eb0ui"]
 [ext_resource type="Script" path="res://scripts/weapons/bone_part.gd" id="4_lqrtn"]
 [ext_resource type="Script" path="res://scripts/system/spawn_snd.gd" id="5_u8m6b"]
-[ext_resource type="AudioStream" uid="uid://cg8utt2b0lmek" path="res://assets/audio/sfx/weapons/reload.wav" id="7_5npxu"]
+[ext_resource type="AudioStream" uid="uid://de2uv108c8kxg" path="res://assets/audio/sfx/weapons/reload-001.wav" id="7_lr4lu"]
+[ext_resource type="AudioStream" uid="uid://baswpoeqaf1am" path="res://assets/audio/sfx/weapons/reload-002.wav" id="8_xcc3n"]
+[ext_resource type="AudioStream" uid="uid://cti3f4nfv1bxm" path="res://assets/audio/sfx/weapons/reload-003.wav" id="9_erg3i"]
+[ext_resource type="AudioStream" uid="uid://cxg1a54t47iux" path="res://assets/audio/sfx/weapons/reload_end-001.wav" id="10_c5qqf"]
+[ext_resource type="AudioStream" uid="uid://g7fdrxf15xr0" path="res://assets/audio/sfx/weapons/reload_end-002.wav" id="11_ggx2o"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jse2y"]
 direction = Vector3(-0.1, 1, 0)
@@ -561,11 +565,50 @@ random_pitch = 1.15
 stream_0/stream = ExtResource("4_eb0ui")
 stream_0/weight = 1.0
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cahcx"]
-streams_count = 1
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0ffwt"]
+streams_count = 3
 random_pitch = 1.15
-stream_0/stream = ExtResource("7_5npxu")
+stream_0/stream = ExtResource("7_lr4lu")
 stream_0/weight = 1.0
+stream_1/stream = ExtResource("8_xcc3n")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("9_erg3i")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l08v2"]
+streams_count = 2
+random_pitch = 1.15
+stream_0/stream = ExtResource("10_c5qqf")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("11_ggx2o")
+stream_1/weight = 1.0
+
+[sub_resource type="Animation" id="Animation_1nu8o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mesh/mag:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.668252, 1.56957, 2.11491)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mesh/mag:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.00927347, -3.12041, -1.78893)]
+}
 
 [sub_resource type="Animation" id="Animation_2tdb4"]
 resource_name = "reload"
@@ -595,33 +638,6 @@ tracks/1/keys = {
 "values": [Vector3(0.00927347, -3.12041, -1.78893), Vector3(-0.0139276, -3.12313, -0.730128), Vector3(-0.0139276, -3.12313, -0.730128), Vector3(0.00927347, -3.12041, -1.78893)]
 }
 
-[sub_resource type="Animation" id="Animation_1nu8o"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("mesh/mag:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.668252, 1.56957, 2.11491)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("mesh/mag:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.00927347, -3.12041, -1.78893)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c4kx5"]
 _data = {
 "RESET": SubResource("Animation_1nu8o"),
@@ -646,7 +662,7 @@ pixel_size = 0.0025
 texture = ExtResource("3_2s8rf")
 
 [node name="bone_part" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161326, 0.328375, -0.342637)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.136301, 0.329847, -0.342637)
 emitting = false
 amount = 1
 lifetime = 1.5
@@ -739,7 +755,7 @@ mesh = SubResource("ArrayMesh_i5qhk")
 skeleton = NodePath("")
 
 [node name="mag" type="Marker3D" parent="mesh"]
-transform = Transform3D(0.0633181, -0.976044, -0.00520802, -0.285449, -0.216402, -0.00228003, 0.00130621, 0.0226875, -0.245803, 0.668252, 1.56957, 2.11491)
+transform = Transform3D(0.0633174, -0.976045, -0.00520755, -0.285449, -0.216399, -0.00228002, 0.00130634, 0.0226856, -0.245803, 0.668252, 1.56957, 2.11491)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="mesh/mag"]
 transform = Transform3D(1, -3.55271e-15, -1.42109e-14, -3.55271e-15, 0.999999, 5.96046e-08, -1.42109e-14, -5.96046e-08, 0.999999, 8.9407e-08, -3.02565, -1.43051e-06)
@@ -762,9 +778,17 @@ script = ExtResource("5_u8m6b")
 calc_occlusion = false
 
 [node name="reload_sound" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamRandomizer_cahcx")
+stream = SubResource("AudioStreamRandomizer_0ffwt")
+volume_db = -3.45
 unit_size = 20.0
-pitch_scale = 2.1
+pitch_scale = 1.25
+max_distance = 100.0
+bus = &"Room"
+
+[node name="reload_end" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_l08v2")
+volume_db = -1.53
+unit_size = 20.0
 max_distance = 100.0
 bus = &"Room"
 

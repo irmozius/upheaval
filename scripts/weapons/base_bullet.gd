@@ -26,7 +26,6 @@ func _ready():
 	await get_tree().process_frame
 	active = true
 	hurt_box.active = true
-#	await get_tree().process_frame
 	$MeshInstance3D.show()
 
 func _physics_process(_delta):
