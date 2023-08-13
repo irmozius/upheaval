@@ -1,0 +1,83 @@
+[gd_scene load_steps=14 format=3 uid="uid://ddx13gvwmsjk2"]
+
+[ext_resource type="Script" path="res://scripts/env/checkpoint.gd" id="1_u2la0"]
+[ext_resource type="AudioStream" uid="uid://cnpm1g3nmheeh" path="res://assets/audio/amb/door_unl.wav" id="6_qi7ey"]
+[ext_resource type="Texture2D" uid="uid://dynwigug8pbda" path="res://assets/textures/CorrugatedSteel005_1K-JPG/CorrugatedSteel005_1K_Color.jpg" id="8_wxma3"]
+[ext_resource type="Texture2D" uid="uid://dhv42jrnoiwvx" path="res://assets/textures/CorrugatedSteel005_1K-JPG/CorrugatedSteel005_1K_NormalGL.jpg" id="9_10pa5"]
+[ext_resource type="Texture2D" uid="uid://dnwbfp28q1j5e" path="res://assets/textures/PaintedMetal016_1K-JPG/PaintedMetal016_1K_Color.jpg" id="10_n76dj"]
+[ext_resource type="Texture2D" uid="uid://d1b76rlrl8iga" path="res://assets/textures/PaintedMetal016_1K-JPG/PaintedMetal016_1K_NormalGL.jpg" id="11_rs603"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xgtjy"]
+albedo_color = Color(0.67451, 0.67451, 0.67451, 1)
+albedo_texture = ExtResource("8_wxma3")
+normal_enabled = true
+normal_texture = ExtResource("9_10pa5")
+uv1_scale = Vector3(0.33, 0.33, 0.33)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_85va1"]
+material = SubResource("StandardMaterial3D_xgtjy")
+size = Vector3(1.4, 12, 1.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cqkvp"]
+data = PackedVector3Array(-0.7, 6, 0.75, 0.7, 6, 0.75, -0.7, -6, 0.75, 0.7, 6, 0.75, 0.7, -6, 0.75, -0.7, -6, 0.75, 0.7, 6, -0.75, -0.7, 6, -0.75, 0.7, -6, -0.75, -0.7, 6, -0.75, -0.7, -6, -0.75, 0.7, -6, -0.75, 0.7, 6, 0.75, 0.7, 6, -0.75, 0.7, -6, 0.75, 0.7, 6, -0.75, 0.7, -6, -0.75, 0.7, -6, 0.75, -0.7, 6, -0.75, -0.7, 6, 0.75, -0.7, -6, -0.75, -0.7, 6, 0.75, -0.7, -6, 0.75, -0.7, -6, -0.75, 0.7, 6, 0.75, -0.7, 6, 0.75, 0.7, 6, -0.75, -0.7, 6, 0.75, -0.7, 6, -0.75, 0.7, 6, -0.75, -0.7, -6, 0.75, 0.7, -6, 0.75, -0.7, -6, -0.75, 0.7, -6, 0.75, 0.7, -6, -0.75, -0.7, -6, -0.75)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3awg"]
+albedo_texture = ExtResource("10_n76dj")
+normal_enabled = true
+normal_texture = ExtResource("11_rs603")
+uv1_scale = Vector3(1, 4.38, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_duekt"]
+material = SubResource("StandardMaterial3D_v3awg")
+size = Vector3(1, 10, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dcakc"]
+size = Vector3(7, 8, 5)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rls2y"]
+streams_count = 1
+stream_0/stream = ExtResource("6_qi7ey")
+stream_0/weight = 1.0
+
+[node name="checkpoint" type="Node3D"]
+script = ExtResource("1_u2la0")
+
+[node name="side" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, 0)
+mesh = SubResource("BoxMesh_85va1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="side"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="side/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_cqkvp")
+
+[node name="front" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 8.20477, 1)
+mesh = SubResource("BoxMesh_duekt")
+
+[node name="side2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 5, 0)
+mesh = SubResource("BoxMesh_85va1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="side2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="side2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_cqkvp")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_dcakc")
+
+[node name="pass" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = SubResource("AudioStreamRandomizer_rls2y")
+volume_db = -3.395
+pitch_scale = 2.05
+max_distance = 39.75
+bus = &"Room"
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

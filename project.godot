@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 MusicManager="*res://scenes/system/music_manager.tscn"
+SaveManager="*res://scenes/system/save_manager.tscn"
 
 [display]
 
@@ -125,3 +126,4 @@ lk_dw={
 3d_physics/layer_2="HitDetection"
 3d_physics/layer_3="EntityDetection"
 3d_physics/layer_4="SoundZones"
+3d_physics/layer_5="Pickups"

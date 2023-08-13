@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://dc3ilymu8ajgw"]
+[gd_scene load_steps=78 format=3 uid="uid://dc3ilymu8ajgw"]
 
 [ext_resource type="Script" path="res://scripts/character/enemy/enemy_character.gd" id="1_rkslx"]
 [ext_resource type="Script" path="res://scripts/character/enemy/TentShootComponent.gd" id="2_esvwi"]
@@ -43,7 +43,9 @@
 [ext_resource type="AudioStream" uid="uid://cdpw3ls5fbhiy" path="res://assets/audio/character/grabber/vomit.wav" id="26_7esxi"]
 [ext_resource type="PackedScene" uid="uid://by1x4o7t22356" path="res://scenes/characters/steering.tscn" id="26_iilnk"]
 [ext_resource type="AudioStream" uid="uid://ceokd41yg1d34" path="res://assets/audio/character/grabber/death.wav" id="28_biy32"]
+[ext_resource type="AudioStream" uid="uid://crxlgrd1p33nk" path="res://assets/audio/character/grabber/hit.wav" id="39_pbxkx"]
 [ext_resource type="Script" path="res://scripts/character/enemy/states/death.gd" id="42_tq4mi"]
+[ext_resource type="Script" path="res://scripts/character/player/states/disabled.gd" id="46_ygk31"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7pcr3"]
 radius = 0.856454
@@ -342,6 +344,12 @@ anim_cooldown = 0.29
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iw126"]
 radius = 0.920065
 height = 4.35585
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7bvfo"]
+streams_count = 1
+random_pitch = 1.15
+stream_0/stream = ExtResource("39_pbxkx")
+stream_0/weight = 1.0
 
 [node name="grabber" type="CharacterBody3D"]
 script = ExtResource("1_rkslx")
@@ -651,6 +659,15 @@ tracker = NodePath("../TargetTrackerComponent")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.19012, -0.0417851)
 shape = SubResource("CapsuleShape3D_iw126")
 
+[node name="hit_snd" type="AudioStreamPlayer3D" parent="HitBoxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.280396, -0.548931)
+stream = SubResource("AudioStreamRandomizer_7bvfo")
+unit_size = 20.0
+pitch_scale = 1.98
+max_distance = 100.0
+bus = &"Room"
+script = ExtResource("20_mmgnl")
+
 [node name="states" type="Node" parent="."]
 script = ExtResource("11_fpduf")
 
@@ -668,6 +685,9 @@ script = ExtResource("42_tq4mi")
 
 [node name="attack_anim" type="Node" parent="states"]
 script = ExtResource("17_vasgu")
+
+[node name="disabled" type="Node" parent="states"]
+script = ExtResource("46_ygk31")
 
 [connection signal="timeout" from="SoundsComponent/btimer" to="SoundsComponent" method="_on_btimer_timeout"]
 [connection signal="timeout" from="AttackDeciderComponent/Timer" to="AttackDeciderComponent" method="_on_timer_timeout"]

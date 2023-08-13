@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://ccru8at7dupbt"]
+
+[ext_resource type="Script" path="res://scripts/system/pickup.gd" id="1_rfgcs"]
+[ext_resource type="AudioStream" uid="uid://crxlgrd1p33nk" path="res://assets/audio/character/grabber/hit.wav" id="2_8dr8w"]
+[ext_resource type="Script" path="res://scripts/system/spawn_snd.gd" id="3_71lwc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jvwrv"]
+radius = 1.01
+
+[sub_resource type="BoxMesh" id="BoxMesh_pbqp6"]
+size = Vector3(0.705, 0.665, 0.925)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1akx4"]
+transparency = 1
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.0392157)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jou7w"]
+material = SubResource("StandardMaterial3D_1akx4")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wnmvt"]
+streams_count = 1
+random_pitch = 1.15
+stream_0/stream = ExtResource("2_8dr8w")
+stream_0/weight = 1.0
+
+[node name="PickUp" type="Area3D"]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_rfgcs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.240026, 0)
+shape = SubResource("SphereShape3D_jvwrv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.327878, 0)
+visible = false
+mesh = SubResource("BoxMesh_pbqp6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.98, 0, 0, 0, 1.98, 0, 0, 0, 1.98, 0, 0.290557, 0)
+mesh = SubResource("SphereMesh_jou7w")
+
+[node name="snd" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.280396, -0.548931)
+stream = SubResource("AudioStreamRandomizer_wnmvt")
+unit_size = 20.0
+pitch_scale = 1.51
+max_distance = 100.0
+bus = &"Room"
+script = ExtResource("3_71lwc")
+calc_occlusion = false
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

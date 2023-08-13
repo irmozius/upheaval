@@ -2,8 +2,14 @@ class_name StateMachine extends Node
 
 @onready var entity = $".."
 
-@onready var state = get_node("idle")
+@onready var state = $disabled
 
+var defer_idle := false
+
+func _ready():
+	if defer_idle:
+		change_state("idle")
+		
 func change_state(new_state : String):
 	if new_state == state.name: return
 #	if entity is EnemyCharacter:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dlkilf53m358b"]
+[gd_scene load_steps=44 format=3 uid="uid://dlkilf53m358b"]
 
 [ext_resource type="Script" path="res://scripts/character/enemy/enemy_character.gd" id="1_uknin"]
 [ext_resource type="PackedScene" uid="uid://bxoaikhox2c48" path="res://scenes/characters/weapon_component.tscn" id="2_688g2"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://mex585j2tad7" path="res://assets/audio/character/drone/hitsnd-002.wav" id="27_xktlr"]
 [ext_resource type="Script" path="res://scripts/character/player/states.gd" id="28_nbnnh"]
 [ext_resource type="Script" path="res://scripts/character/enemy/states/idle.gd" id="29_58r5e"]
+[ext_resource type="Script" path="res://scripts/character/player/states/disabled.gd" id="29_utgvj"]
 [ext_resource type="Script" path="res://scripts/character/enemy/states/chase.gd" id="30_5lvsc"]
 [ext_resource type="Script" path="res://scripts/character/enemy/states/falling.gd" id="31_2gfni"]
 [ext_resource type="Script" path="res://scripts/character/enemy/states/death.gd" id="32_5ngk8"]
@@ -475,7 +476,7 @@ sounds = NodePath("../SoundsComponent")
 tracker = NodePath("../TargetTrackerComponent")
 
 [node name="HitBoxComponent" parent="." instance=ExtResource("27_0u1cx")]
-transform = Transform3D(1, 0, 0, 0, 0.99759, 0.0693877, 0, -0.0693877, 0.99759, 0, -0.0130752, 0.287648)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 transform = Transform3D(1, 0, 0, 0, -4.47035e-08, 1, 0, -1, -4.47035e-08, 0, 3.40769, -2.08616e-07)
@@ -536,6 +537,9 @@ script = ExtResource("32_5ngk8")
 
 [node name="attack_anim" type="Node" parent="states"]
 script = ExtResource("33_ge0vb")
+
+[node name="disabled" type="Node" parent="states"]
+script = ExtResource("29_utgvj")
 
 [connection signal="timeout" from="SoundsComponent/btimer" to="SoundsComponent" method="_on_btimer_timeout"]
 [connection signal="timeout" from="AttackDeciderComponent/Timer" to="AttackDeciderComponent" method="_on_timer_timeout"]

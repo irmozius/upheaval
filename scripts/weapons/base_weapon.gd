@@ -31,8 +31,12 @@ var reloading := false
 signal reload_mid
 
 func _ready():
-	if get_stockpile() > clip_size:
+	if get_stockpile() >= clip_size:
 		clip = clip_size
+	else:
+		clip = get_stockpile()
+		if clip == 0:
+			can_fire = false
 	update_ammo_display()
 	timer = Timer.new()
 	add_child(timer)
@@ -86,18 +90,18 @@ func update_stockpile(amnt):
 
 func reload():
 	if clip == clip_size: return
+	var ammo = get_stockpile()
+	if ammo >= clip_size:
+		clip = clip_size
+	else:
+		if ammo == 0: return
+		if clip == ammo: return
+		clip = ammo
 	animation_player.play("reload")
 	reload_sound.play()
 	can_fire = false
 	lerp_back = false
 	reloading = true
-	var ammo = get_stockpile()
-	if ammo >= clip_size:
-		clip = clip_size
-	elif ammo > 0:
-		clip += ammo
-	elif ammo == 0:
-		return
 	reload_rotate()
 	var t = create_tween()
 	t.tween_property(self, 'position:y', 0.2, 0.3)
@@ -155,8 +159,8 @@ func scale_mag():
 func update_ammo_display():
 	if !weapons.team == "player": return
 	var lab : Label = weapons.ammo_lab
-#	var ammo = get_stockpile()
-	lab.text = str("Clip: %s" % clip)
+	var ammo = get_stockpile()
+	lab.text = str("Clip: %s\nAmmo: %s" % [clip, ammo])
 
 func muzzle_flare():
 	flare.rotate_z(randf())

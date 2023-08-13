@@ -1,4 +1,4 @@
-extends Node
+class_name HealthComponent extends Node
 
 @onready var entity = $".."
 
@@ -7,6 +7,7 @@ extends Node
 @export var max_hp := 100.0
 @export var sounds : Node
 @export var tracker : Node
+@export var hpbar : Node
 
 @onready var states = $"../states"
 #@onready var sounds = $"../SoundsComponent"
@@ -26,6 +27,8 @@ func take_damage(dam : float, _e):
 
 func change_hp(amnt : float):
 	hp += amnt
+	if hpbar:
+		hpbar.value = hp
 	if hp <= 0.0:
 		die()
 
