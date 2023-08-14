@@ -6,11 +6,15 @@ func save_data(player : PlayerCharacter, checkpoint):
 	var health = player.get_node("HealthComponent")
 	var pickups = get_tree().get_first_node_in_group("pickups").found_list
 	var doors = get_tree().get_first_node_in_group("doors").opened_doors
+	var checkpoints = get_tree().get_first_node_in_group("checkpoints").found_list
+	var killed_list = get_tree().get_first_node_in_group("enemies").killed
 	var save := SaveData.new()
 	save.empty = false
 	save.arsenal = weapons.arsenal
 	save.ammo = [weapons.light_ammo, weapons.med_ammo, weapons.heavy_ammo]
 	save.keys = keyring.keys
+	save.checkpoint_list = checkpoints
+	save.killed_enemies = killed_list
 	save.checkpoint = checkpoint.get_index()
 	save.pickups = pickups
 	save.hp = health.hp
@@ -20,7 +24,5 @@ func save_data(player : PlayerCharacter, checkpoint):
 func load_data(player : PlayerCharacter):
 	if !ResourceLoader.exists("user://save.tres"):
 		return SaveData.new()
-	
-	var data : SaveData = ResourceLoader.load("user://save.tres", "SaveData", ResourceLoader.CACHE_MODE_REPLACE)
-	
+	var data : SaveData = ResourceLoader.load("user://save.tres", "SaveData", ResourceLoader.CACHE_MODE_REPLACE)	
 	return data

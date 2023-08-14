@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dnwbfp28q1j5e" path="res://assets/textures/PaintedMetal016_1K-JPG/PaintedMetal016_1K_Color.jpg" id="10_n76dj"]
 [ext_resource type="Texture2D" uid="uid://d1b76rlrl8iga" path="res://assets/textures/PaintedMetal016_1K-JPG/PaintedMetal016_1K_NormalGL.jpg" id="11_rs603"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xgtjy"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fyf7w"]
 albedo_color = Color(0.67451, 0.67451, 0.67451, 1)
 albedo_texture = ExtResource("8_wxma3")
 normal_enabled = true
@@ -17,7 +17,7 @@ uv1_triplanar = true
 uv1_world_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_85va1"]
-material = SubResource("StandardMaterial3D_xgtjy")
+material = SubResource("StandardMaterial3D_fyf7w")
 size = Vector3(1.4, 12, 1.5)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cqkvp"]

@@ -648,6 +648,7 @@ _data = {
 script = ExtResource("1_srg4a")
 damage = 40.0
 bullet_res = ExtResource("2_n3nvc")
+clip_size = 15
 mag_mesh = NodePath("mesh/mag")
 bone_part = NodePath("bone_part")
 

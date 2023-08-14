@@ -1,5 +1,8 @@
 extends Node3D
 
-func set_checkpoints(num : int):
-	for i in range(num + 1):
-		get_child(i).passed = true
+var found_list : Array[int]
+
+func set_checkpoints(nums : Array[int]):
+	found_list = nums
+	for i in found_list.size():
+		get_child(found_list[i]).passed = true

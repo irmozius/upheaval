@@ -67,3 +67,8 @@ text = "welcome"
 font = ExtResource("1_ju5u2")
 font_size = 122
 outline_size = 0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

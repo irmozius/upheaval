@@ -30,7 +30,7 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.6
 
-[sub_resource type="BoxMesh" id="BoxMesh_cjh27"]
+[sub_resource type="BoxMesh" id="BoxMesh_fupi3"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_ttwqj")
 size = Vector3(2.355, 1.31, 0.045)
@@ -94,7 +94,7 @@ shape = SubResource("ConcavePolygonShape3D_fvc8s")
 
 [node name="Screen" parent="middle" instance=ExtResource("4_a7x1g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.59542, 0.500245)
-mesh = SubResource("BoxMesh_cjh27")
+mesh = SubResource("BoxMesh_fupi3")
 skeleton = NodePath("../..")
 msg = "Enter"
 s_colour = Color(0.537255, 0.819608, 0.454902, 1)

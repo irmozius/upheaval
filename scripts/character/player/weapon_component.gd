@@ -10,11 +10,17 @@ class_name WeaponsComponent extends Node3D
 
 @onready var entity = $"../.."
 @onready var cast = $"../RayCast3D"
-@onready var ammo_lab = $"../../UI/Label"
+#@onready var ammo_lab = $"../../UI/Label"
 
 var weapon
 
 var num := 0
+
+func get_ammo_lab():
+	var lab = get_node("../../UI/Label")
+	if lab:
+		return lab
+	return
 
 func _ready():
 	spawn_weapon(0)
@@ -41,6 +47,7 @@ func tween_weapon_spawn(inward : bool):
 	return t
 	
 func change_weapon():
+	if arsenal.size() == 1: return
 	weapon.disabled = true
 	await tween_weapon_spawn(false).finished
 	weapon.queue_free()

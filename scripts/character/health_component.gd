@@ -39,6 +39,7 @@ func die():
 		sounds.stop_barks()
 	if !entity is PlayerCharacter:
 		states.change_state("death")
+		entity.get_parent().killed.append(entity.get_index())
 	died.emit()
 	entity.remove_pieces()
 	if entity is PlayerCharacter:

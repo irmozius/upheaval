@@ -1,0 +1,107 @@
+[gd_scene load_steps=14 format=3 uid="uid://c8qrbowlnb23p"]
+
+[ext_resource type="Script" path="res://scripts/env/level_lift.gd" id="1_35x1q"]
+[ext_resource type="Texture2D" uid="uid://de03apbvl6qq0" path="res://assets/textures/Concrete031_1K-JPG/Concrete031_1K_Color.jpg" id="1_v1bsq"]
+[ext_resource type="Texture2D" uid="uid://cwyyx5wdpxb6s" path="res://assets/textures/Concrete031_1K-JPG/Concrete031_1K_NormalGL.jpg" id="2_kfueb"]
+[ext_resource type="PackedScene" uid="uid://laeko1hy6q7a" path="res://scenes/env/door.tscn" id="4_q47x3"]
+[ext_resource type="PackedScene" uid="uid://ceohi82jfix7e" path="res://scenes/env/sign.tscn" id="5_37uh1"]
+[ext_resource type="FontFile" uid="uid://c632mcqrft205" path="res://assets/fonts/TeenyTinyPixls-o2zo.ttf" id="6_ru4in"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qu3n2"]
+resource_name = "wall"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_v1bsq")
+metallic_specular = 0.0
+roughness_texture = ExtResource("2_kfueb")
+normal_enabled = true
+uv1_scale = Vector3(0.034, 0.034, 0.034)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.707107
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ul2yq"]
+material = SubResource("StandardMaterial3D_qu3n2")
+size = Vector3(14, 9, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c0xr7"]
+material = SubResource("StandardMaterial3D_qu3n2")
+size = Vector3(9.5, 9, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ttwqj"]
+resource_local_to_scene = true
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_j5gnq"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ttwqj")
+size = Vector3(2.355, 1.31, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dcakc"]
+size = Vector3(7, 8, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q2fka"]
+font = ExtResource("6_ru4in")
+font_size = 11
+
+[node name="level_lift" type="Node3D"]
+script = ExtResource("1_35x1q")
+
+[node name="wall_left" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.5)
+mesh = SubResource("BoxMesh_ul2yq")
+
+[node name="wall_left2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5)
+mesh = SubResource("BoxMesh_ul2yq")
+
+[node name="wall_back" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.041, 0, 0.0313177)
+mesh = SubResource("BoxMesh_c0xr7")
+
+[node name="sign" parent="." instance=ExtResource("5_37uh1")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 3.5, 0)
+sign_text = "to labs"
+
+[node name="door" parent="." instance=ExtResource("4_q47x3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.5, -4.5, 0)
+
+[node name="Screen" parent="door/middle" index="1"]
+mesh = SubResource("BoxMesh_j5gnq")
+
+[node name="front" parent="door" index="2"]
+visible = false
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_dcakc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "LEVEL CLEAR"
+label_settings = SubResource("LabelSettings_q2fka")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+
+[editable path="door"]

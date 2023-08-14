@@ -1,7 +1,7 @@
 [gd_scene load_steps=66 format=3 uid="uid://bsjm7kikbd1tl"]
 
 [ext_resource type="Script" path="res://scripts/weapons/base_weapon.gd" id="1_f3reb"]
-[ext_resource type="PackedScene" uid="uid://6yeci82hrjrm" path="res://scenes/weapons/bone_bullet.tscn" id="2_ocgt8"]
+[ext_resource type="PackedScene" uid="uid://b320cie7dgpak" path="res://scenes/weapons/sinew_dart.tscn" id="2_lr6y1"]
 [ext_resource type="Texture2D" uid="uid://g2hnujgcjofu" path="res://addons/kenney_particle_pack/fire_01.png" id="3_8lwih"]
 [ext_resource type="AudioStream" uid="uid://b77jro7ynbx2h" path="res://assets/audio/sfx/weapons/rifle-001.wav" id="4_1dkyv"]
 [ext_resource type="Script" path="res://scripts/system/spawn_snd.gd" id="5_n2juy"]
@@ -616,14 +616,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xyhel")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfp2n"]
-resource_name = "bone"
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
-roughness = 0.5
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3k02"]
+albedo_color = Color(0.67451, 0.564706, 0.831373, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_to65p"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_1cw8n"]
 _surfaces = [{
 "aabb": AABB(-0.939013, -6.17142, -4.17928, 1.61688, 11.1454, 6.11534),
 "format": 4097,
@@ -636,7 +632,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_8jjc0"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_8yll1"]
 resource_name = "bone_pistol-6daa8085dd69d600386ed3106d3b0c14_Cube_004"
 _surfaces = [{
 "aabb": AABB(-0.939013, -6.17142, -4.17928, 1.61688, 11.1454, 6.11534),
@@ -644,14 +640,14 @@ _surfaces = [{
 "format": 4119,
 "index_count": 36,
 "index_data": PackedByteArray(0, 0, 9, 0, 3, 0, 0, 0, 6, 0, 9, 0, 8, 0, 21, 0, 10, 0, 8, 0, 19, 0, 21, 0, 20, 0, 17, 0, 23, 0, 20, 0, 14, 0, 17, 0, 13, 0, 4, 0, 15, 0, 13, 0, 2, 0, 4, 0, 7, 0, 12, 0, 18, 0, 7, 0, 1, 0, 12, 0, 22, 0, 5, 0, 11, 0, 22, 0, 16, 0, 5, 0),
-"material": SubResource("StandardMaterial3D_nfp2n"),
+"material": SubResource("StandardMaterial3D_v3k02"),
 "name": "bone",
 "primitive": 3,
 "vertex_count": 24,
 "vertex_data": PackedByteArray(8, 104, 110, 191, 66, 124, 197, 192, 210, 167, 43, 192, 19, 0, 229, 127, 239, 127, 204, 233, 8, 104, 110, 191, 66, 124, 197, 192, 210, 167, 43, 192, 43, 164, 0, 0, 255, 255, 255, 191, 8, 104, 110, 191, 66, 124, 197, 192, 210, 167, 43, 192, 255, 127, 9, 90, 204, 119, 34, 234, 48, 99, 112, 191, 154, 15, 153, 64, 211, 208, 247, 63, 19, 0, 229, 127, 239, 127, 254, 236, 48, 99, 112, 191, 154, 15, 153, 64, 211, 208, 247, 63, 255, 127, 9, 90, 239, 127, 254, 236, 48, 99, 112, 191, 154, 15, 153, 64, 211, 208, 247, 63, 255, 127, 211, 219, 0, 0, 255, 191, 8, 104, 110, 191, 220, 156, 178, 192, 178, 188, 133, 192, 19, 0, 229, 127, 239, 127, 182, 233, 8, 104, 110, 191, 220, 156, 178, 192, 178, 188, 133, 192, 43, 164, 0, 0, 255, 255, 255, 191, 8, 104, 110, 191, 220, 156, 178, 192, 178, 188, 133, 192, 119, 211, 255, 255, 23, 120, 39, 231, 48, 99, 112, 191, 21, 43, 159, 64, 223, 204, 185, 63, 19, 0, 229, 127, 239, 127, 185, 236, 48, 99, 112, 191, 21, 43, 159, 64, 223, 204, 185, 63, 119, 211, 255, 255, 239, 127, 182, 233, 48, 99, 112, 191, 21, 43, 159, 64, 223, 204, 185, 63, 255, 127, 211, 219, 0, 0, 255, 191, 160, 136, 45, 63, 66, 124, 197, 192, 210, 167, 43, 192, 43, 164, 0, 0, 255, 255, 255, 191, 160, 136, 45, 63, 66, 124, 197, 192, 210, 167, 43, 192, 255, 127, 9, 90, 148, 119, 14, 234, 160, 136, 45, 63, 66, 124, 197, 192, 210, 167, 43, 192, 82, 242, 205, 137, 223, 119, 42, 231, 1, 41, 214, 190, 154, 15, 153, 64, 211, 208, 247, 63, 255, 127, 9, 90, 55, 127, 189, 236, 1, 41, 214, 190, 154, 15, 153, 64, 211, 208, 247, 63, 255, 127, 211, 219, 0, 0, 255, 191, 1, 41, 214, 190, 154, 15, 153, 64, 211, 208, 247, 63, 82, 242, 205, 137, 148, 119, 14, 234, 160, 136, 45, 63, 220, 156, 178, 192, 178, 188, 133, 192, 43, 164, 0, 0, 255, 255, 255, 191, 160, 136, 45, 63, 220, 156, 178, 192, 178, 188, 133, 192, 119, 211, 255, 255, 225, 119, 21, 231, 160, 136, 45, 63, 220, 156, 178, 192, 178, 188, 133, 192, 82, 242, 205, 137, 225, 119, 21, 231, 1, 41, 214, 190, 21, 43, 159, 64, 223, 204, 185, 63, 119, 211, 255, 255, 63, 127, 125, 233, 1, 41, 214, 190, 21, 43, 159, 64, 223, 204, 185, 63, 255, 127, 211, 219, 0, 0, 255, 191, 1, 41, 214, 190, 21, 43, 159, 64, 223, 204, 185, 63, 82, 242, 205, 137, 154, 119, 208, 233)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_to65p")
+shadow_mesh = SubResource("ArrayMesh_1cw8n")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g1wyp"]
 streams_count = 3
@@ -771,13 +767,14 @@ stream_1/weight = 1.0
 script = ExtResource("1_f3reb")
 wep_name = "rifle"
 damage = 20.0
-bullet_res = ExtResource("2_ocgt8")
+bullet_res = ExtResource("2_lr6y1")
 rate = 0.1
 reload_time = 1.2
 kickback = 0.1
 clip_size = 30
 mag_mesh = NodePath("mesh/mag")
 bone_part = NodePath("bone_part")
+rounds = "medium"
 
 [node name="spawn_pos" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0196311, 0.290557, -1.84718)
@@ -886,8 +883,8 @@ skeleton = NodePath("")
 transform = Transform3D(0.216551, -0.97604, -0.0211802, -0.97626, -0.216398, -0.00927334, 0.0044678, 0.0226855, -0.999732, 0.483605, 0.393555, 0.38828)
 
 [node name="bone4" type="MeshInstance3D" parent="mesh/mag"]
-transform = Transform3D(0.0744941, 0.00167382, -0.00224781, 0.000389015, -0.0852588, -0.0654168, -0.00177977, 0.0514244, -0.108384, 0.0195396, -0.724929, -0.0720989)
-mesh = SubResource("ArrayMesh_8jjc0")
+transform = Transform3D(0.0721457, 0.00147412, -0.00206382, 0.000376749, -0.0750865, -0.0600622, -0.00172366, 0.0452889, -0.0995124, 0.00813851, -0.673634, -0.0688255)
+mesh = SubResource("ArrayMesh_8yll1")
 skeleton = NodePath("")
 
 [node name="shot_sound" type="AudioStreamPlayer3D" parent="."]

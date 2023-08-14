@@ -4,6 +4,6 @@ var found_list : Array[int]
 
 func set_pickups(nums : Array[int]):
 	found_list = nums
-	for i in get_child_count():
-		var f = nums.find(i)
-		if !(f == -1): get_child(i).queue_free()
+	print(str(found_list))
+	for i in found_list.size():
+		get_child(found_list[i]).disable()

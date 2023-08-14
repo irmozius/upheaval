@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://ceohi82jfix7e"]
+
+[ext_resource type="Texture2D" uid="uid://khe87u3ol6pn" path="res://assets/textures/PaintedMetal004_1K-JPG/PaintedMetal004_1K_Color.jpg" id="1_iiino"]
+[ext_resource type="Texture2D" uid="uid://bn62i20g2fdjy" path="res://assets/textures/PaintedMetal004_1K-JPG/PaintedMetal004_1K_NormalGL.jpg" id="2_h70xe"]
+[ext_resource type="FontFile" uid="uid://c632mcqrft205" path="res://assets/fonts/TeenyTinyPixls-o2zo.ttf" id="3_3ww2a"]
+[ext_resource type="Script" path="res://scripts/env/sign.gd" id="3_xl6k0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0u468"]
+albedo_texture = ExtResource("1_iiino")
+metallic = 0.52
+metallic_specular = 0.73
+roughness = 0.46
+normal_enabled = true
+normal_texture = ExtResource("2_h70xe")
+uv1_scale = Vector3(8.055, 1.2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i3nrj"]
+material = SubResource("StandardMaterial3D_0u468")
+size = Vector3(8.33, 1.37, 0.155)
+
+[node name="sign" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_i3nrj")
+script = ExtResource("3_xl6k0")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0708938, 0.0874294)
+pixel_size = 0.0175
+shaded = true
+text = "asshole palace"
+font = ExtResource("3_3ww2a")
+font_size = 48
+outline_size = 0
+uppercase = true

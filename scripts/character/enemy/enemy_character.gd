@@ -14,3 +14,8 @@ func remove_pieces():
 	motion.queue_free()
 	rotator.queue_free()
 	shape.queue_free()
+
+func create_corpse():
+	remove_pieces()
+	$SoundsComponent.disabled = true
+	$AnimationComponent.play("death")

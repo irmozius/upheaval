@@ -15,7 +15,6 @@ func set_target(t):
 	if target: return
 	MusicManager.danger += danger_level
 	target = t
-#	aim_pos = t.global_position + 
 	target.get_node("HealthComponent").died.connect(target_death)
 
 func target_death():

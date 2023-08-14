@@ -37,7 +37,7 @@ func _ready():
 		clip = get_stockpile()
 		if clip == 0:
 			can_fire = false
-	update_ammo_display()
+#	update_ammo_display()
 	timer = Timer.new()
 	add_child(timer)
 	timer.one_shot = true
@@ -110,7 +110,7 @@ func reload():
 	reload_end_sound.play()
 	reload_mid.emit()
 	lerp_back = true
-	update_ammo_display()
+#	update_ammo_display()
 	if mag_mesh:
 		scale_mag()
 	await get_tree().create_timer(0.1).timeout
@@ -139,7 +139,7 @@ func minus_ammo():
 	if ammo == 0:
 		can_fire = false
 	update_stockpile(ammo)
-	update_ammo_display()
+#	update_ammo_display()
 	if mag_mesh:
 		scale_mag()
 	
@@ -156,11 +156,11 @@ func scale_mag():
 	var new_size : float = float(clip) / float(clip_size * 0.9)
 	mag_mesh.scale.y = new_size
 
-func update_ammo_display():
-	if !weapons.team == "player": return
-	var lab : Label = weapons.ammo_lab
-	var ammo = get_stockpile()
-	lab.text = str("Clip: %s\nAmmo: %s" % [clip, ammo])
+#func update_ammo_display():
+#	if !weapons.team == "player": return
+#	var lab : Label = weapons.ammo_lab
+#	var ammo = get_stockpile()
+#	lab.text = str("Clip: %s\nAmmo: %s" % [clip, ammo])
 
 func muzzle_flare():
 	flare.rotate_z(randf())

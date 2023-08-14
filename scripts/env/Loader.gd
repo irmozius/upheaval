@@ -6,20 +6,31 @@ extends Node
 @onready var checkpoints = $"../checkpoints"
 @onready var pickups = $"../Pickups"
 @onready var doors = $"../doors"
+@onready var enemies = $"../enemies"
 
 func _ready():
 	var player : PlayerCharacter = player_res.instantiate()
 	player.get_node("states").defer_idle = true
 	world.add_child.call_deferred(player)
 	await player.ready
-	var data = SaveManager.load_data(player)
+	fadein_fx()
+	var data : SaveData = SaveManager.load_data(player)
 	if !data.empty:
-		checkpoints.set_checkpoints(data.checkpoint)
+		checkpoints.set_checkpoints(data.checkpoint_list)
 		pickups.set_pickups(data.pickups)
 		doors.set_doors(data.doors)
+		enemies.set_killed(data.killed_enemies)
 		load_game(player, data)
 	else:
 		start_game(player)
+
+func fadein_fx():
+	var t = create_tween()
+	t.tween_method(fade_fx, -60, 0.0, 1.0)
+
+func fade_fx(value : float):
+	var bus = AudioServer.get_bus_index("Room")
+	AudioServer.set_bus_volume_db(bus, value)
 	
 func start_game(player):
 	player.global_position = start_pos.global_position
@@ -41,6 +52,5 @@ func load_game(player : PlayerCharacter, data : SaveData):
 	weapons.light_ammo = data.ammo[0]
 	weapons.med_ammo = data.ammo[1]
 	weapons.heavy_ammo = data.ammo[2]
-	weapons.weapon.update_ammo_display()
 	keyring.keys = data.keys
 	player.get_node("states").change_state("idle")

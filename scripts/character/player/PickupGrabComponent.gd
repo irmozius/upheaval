@@ -16,7 +16,6 @@ func pickup(pickup_res : PickupResource):
 			health_component.change_hp(pickup_res.hp_amount)
 			tween_hp_col()
 		"Ammo":
-			print('ammo replen')
 			match pickup_res.ammo_type:
 				"light":
 					weapon_component.light_ammo += pickup_res.amount
@@ -24,7 +23,6 @@ func pickup(pickup_res : PickupResource):
 					weapon_component.med_ammo += pickup_res.amount
 				"heavy":
 					weapon_component.heavy_ammo += pickup_res.amount
-			weapon_component.weapon.update_ammo_display()
 
 func tween_hp_col():
 	heal_green.show()
