@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d2pmo6ung7iuj"
+path="res://.godot/imported/staff_dorms_Section B_DRUMS.ogg-91ad036676e332dbc64c9b0fc5649876.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/staff_dorm/staff_dorms_Section B_DRUMS.ogg"
+dest_files=["res://.godot/imported/staff_dorms_Section B_DRUMS.ogg-91ad036676e332dbc64c9b0fc5649876.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

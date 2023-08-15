@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c10erv3npmoj3"
+path="res://.godot/imported/staff_dorms_Section A_Pad.ogg-5823e69a100692ec341d0b8abf8c7e5e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/staff_dorm/staff_dorms_Section A_Pad.ogg"
+dest_files=["res://.godot/imported/staff_dorms_Section A_Pad.ogg-5823e69a100692ec341d0b8abf8c7e5e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

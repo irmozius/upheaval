@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bjvo17xb2o7sc"
+path="res://.godot/imported/staff_dorms_End Section_EDrum.ogg-557e8902e66cf36902fd22a70a6d6371.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/staff_dorm/staff_dorms_End Section_EDrum.ogg"
+dest_files=["res://.godot/imported/staff_dorms_End Section_EDrum.ogg-557e8902e66cf36902fd22a70a6d6371.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

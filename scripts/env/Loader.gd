@@ -15,6 +15,14 @@ func _ready():
 	await player.ready
 	fadein_fx()
 	var data : SaveData = SaveManager.load_data(player)
+	if !MusicManager.playing:
+		MusicManager.playing = true
+		MusicManager.current_song = data.current_song
+		MusicManager.current_player = MusicManager.get_node(data.current_song)
+		MusicManager.get_node(MusicManager.current_song).mplay()
+	else:
+		if !MusicManager.current_song == data.current_song:
+			MusicManager.current_player.transition(MusicManager.get_node(data.current_song))
 	if !data.empty:
 		checkpoints.set_checkpoints(data.checkpoint_list)
 		pickups.set_pickups(data.pickups)

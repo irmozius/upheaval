@@ -14,6 +14,8 @@ func pass_checkpoint(player):
 	get_parent().found_list.append(get_index())
 	messager.display_message("checkpoint.\ngame saved.")
 	pass_snd.play()
+	MusicManager.next_section.emit()
+	await MusicManager.trans
 	SaveManager.save_data(player, self)
 	
 func _on_area_3d_body_entered(body):

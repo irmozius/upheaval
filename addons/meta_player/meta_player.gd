@@ -89,6 +89,7 @@ var precision_margin := 0.02
 
 signal beat ## Emitted every beat during playback.
 signal bar ## Emitted at the start of each bar during playback.
+signal trans ## Emitted when transitioning.
 
 func _ready():
 	if get_parent() is meta_player:
@@ -184,6 +185,7 @@ func transition(player : meta_player = trans_buffer.player):
 	mstop()
 	player.mplay()
 	trans_buffer = {}
+	trans.emit(player)
 
 func mplay():
 	spawn_copy()
@@ -298,5 +300,5 @@ func stop_group():
 		if i is meta_player:
 			i.mstop()
 	await t.finished
-	if copy:
+	if is_instance_valid(copy):
 		copy.queue_free()

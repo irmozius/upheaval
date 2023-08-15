@@ -102,6 +102,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="menubut" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.734375
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_ru4in")
+theme_override_font_sizes/font_size = 7
+text = "menu"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="pressed" from="ColorRect/menubut" to="." method="_on_menubut_pressed"]
 
 [editable path="door"]

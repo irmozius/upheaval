@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bgbcmnuwebw7d"
+path="res://.godot/imported/staff_dorms_End Build_SynGtr.ogg-dad1cbc961c8f9b1e89df016149d0ba3.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/staff_dorm/staff_dorms_End Build_SynGtr.ogg"
+dest_files=["res://.godot/imported/staff_dorms_End Build_SynGtr.ogg-dad1cbc961c8f9b1e89df016149d0ba3.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

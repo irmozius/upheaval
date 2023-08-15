@@ -16,6 +16,7 @@ func save_data(player : PlayerCharacter, checkpoint):
 	save.checkpoint_list = checkpoints
 	save.killed_enemies = killed_list
 	save.checkpoint = checkpoint.get_index()
+	save.current_song = MusicManager.current_song
 	save.pickups = pickups
 	save.hp = health.hp
 	save.doors = doors

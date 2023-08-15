@@ -18,7 +18,7 @@ wet = 0.17
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_2s5rp"]
 resource_name = "Compressor"
-threshold = -4.0
+threshold = -10.0
 ratio = 12.0
 gain = 4.0
 

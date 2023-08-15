@@ -41,10 +41,18 @@ label_settings = SubResource("LabelSettings_0phbh")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="continue" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_cwtiy")
+theme_override_font_sizes/font_size = 7
+text = "CONTINUE"
+
 [node name="start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_cwtiy")
 theme_override_font_sizes/font_size = 7
 text = "BEGIN"
 
+[connection signal="pressed" from="VBoxContainer/continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="VBoxContainer/start" to="." method="_on_button_pressed"]

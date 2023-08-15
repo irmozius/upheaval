@@ -44,5 +44,6 @@ func die():
 	entity.remove_pieces()
 	if entity is PlayerCharacter:
 		MusicManager.danger = 0.0
+		MusicManager.death.emit()
 		get_tree().get_first_node_in_group("dead_screen").reveal()
 		entity.queue_free()
