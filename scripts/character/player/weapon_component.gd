@@ -31,6 +31,7 @@ func spawn_weapon(n : int):
 	weapon.team = team
 	add_child(w)
 	await tween_weapon_spawn(true).finished
+	if !is_instance_valid(w): return
 	w.disabled = false
 	
 func weapon_attack(_type : String):
